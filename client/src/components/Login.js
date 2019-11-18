@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.scss';
 
 const Login = () => {
 	console.log(process.env.REACT_APP_BACKEND);
+	const baseUrl = process.env.REACT_APP_BACKEND;
+
 	const [newUser, setNewUser] = useState(true);
 
 	const [formData, setFormData] = useState({
@@ -18,9 +21,15 @@ const Login = () => {
 		});
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		console.log(formData);
+		try {
+			const res = await axios.post(`${baseUrl}/registration/`, formData);
+			console.log(res.data);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	return (
