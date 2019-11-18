@@ -1,7 +1,12 @@
-.Login__toggle {
-	// border: 1px solid red;
+.Login {
+	align-items: center;
 	display: flex;
-	justify-content: space-around;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.Login__toggle {
+	display: flex;
 	p {
 		cursor: pointer;
 		padding: 1rem;
@@ -9,14 +14,27 @@
 			background: slategray;
 		}
 		&.active {
-			background: red;
+			background: black;
+			color: white;
 		}
 	}
 }
 
 .Login__form {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: column;
-	// border: 1px solid red;
+
+	button {
+		cursor: pointer;
+		padding: 1rem;
+	}
+	label {
+		align-self: flex-start;
+	}
+	input {
+		padding: 0.5rem;
+		margin-bottom: 1rem;
+		width: 80%;
+	}
 }

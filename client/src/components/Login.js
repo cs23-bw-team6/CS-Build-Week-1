@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Login.scss';
 
 const Login = () => {
-	console.log(process.env.REACT_APP_BACKEND);
 	const baseUrl = process.env.REACT_APP_BACKEND;
 
 	const [newUser, setNewUser] = useState(true);
@@ -23,10 +22,13 @@ const Login = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		console.log(formData);
+		const postUrl = newUser ? `${baseUrl}/registration/` : `${baseUrl}/login/`;
+		const postData = newUser
+			? formData
+			: { username: formData.username, password: formData.password1 };
 		try {
-			const res = await axios.post(`${baseUrl}/registration/`, formData);
-			console.log(res.data);
+			const res = await axios.post(postUrl, postData);
+			window.localStorage.setItem('token', res.data.key);
 		} catch (err) {
 			console.error(err);
 		}
