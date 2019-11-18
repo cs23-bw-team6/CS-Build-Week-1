@@ -97,6 +97,7 @@ class Room(models.Model):
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_room = models.IntegerField(default=0)
+    items = models.ManyToManyField('Item')
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
 
     def __str__(self):
@@ -105,6 +106,7 @@ class Player(models.Model):
     def __dict(self):
         return {'user': self.user,
                 'current_room': self.current_room,
+                'item': {item.id: item.__dict__() for item in self.items.all()},
                 'uuid': self.uuid}
 
     def initialize(self):
