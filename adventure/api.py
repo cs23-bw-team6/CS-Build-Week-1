@@ -15,6 +15,13 @@ import json
 #                 secret=config('PUSHER_SECRET'),
 #                 cluster=config('PUSHER_CLUSTER'))
 
+@csrf_exempt
+@api_view(["GET"])
+def rooms(request):
+    room = Room.objects.all()
+    ret = {room.id: room.__dict__() for room in Room.objects.all()}
+    return JsonResponse({'rooms': ret})
+
 
 @csrf_exempt
 @api_view(["GET"])

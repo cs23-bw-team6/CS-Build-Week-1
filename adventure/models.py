@@ -17,6 +17,14 @@ class Room(models.Model):
     def __str__(self):
         return f"{self.title}\n{self.description}"
 
+    def __dict__(self):
+        return {'title': self.title,
+                'description': self.description,
+                'n_to': self.n_to,
+                's_to': self.s_to,
+                'e_to': self.e_to,
+                'w_to': self.w_to}
+
     def connect_rooms(self, destination_room, direction):
         destination_room_id = destination_room.id
         try:
