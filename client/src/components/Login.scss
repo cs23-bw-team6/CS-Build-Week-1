@@ -1,0 +1,22 @@
+.Login__toggle {
+	// border: 1px solid red;
+	display: flex;
+	justify-content: space-around;
+	p {
+		cursor: pointer;
+		padding: 1rem;
+		&:hover {
+			background: slategray;
+		}
+		&.active {
+			background: red;
+		}
+	}
+}
+
+.Login__form {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	// border: 1px solid red;
+}
