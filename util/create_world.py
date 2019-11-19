@@ -1,7 +1,7 @@
 # from django.contrib.auth.models import User
 import sys
 sys.path.append('../adventure')
-from adventure.models import Player, Room
+from adventure.models import Player, Room, Item, Container
 
 Room.objects.all().delete()
 
@@ -41,7 +41,15 @@ r_narrow.connect_rooms(r_foyer, "w")
 r_narrow.connect_rooms(r_treasure, "n")
 r_treasure.connect_rooms(r_narrow, "s")
 
+# Adding items to rooms.
+Item.objects.all().delete()
+thing = Item(name='thing', description='just a thing')
+thing.save()
+r_outside.add_item(thing)
+
 players = Player.objects.all()
 for p in players:
     p.currentRoom = r_outside.id
     p.save()
+
+print('World Created!! Good Job!')
