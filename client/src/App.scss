@@ -1,3 +1,24 @@
+body {
+	background: beige;
+	font-family: sans-serif;
+}
+
 .App {
-  text-align: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 1rem;
+	.left-side {
+		text-align: center;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		h1 {
+			margin: 1rem;
+		}
+		img {
+			width: 80%;
+			max-width: 400px;
+		}
+	}
 }
