@@ -42,10 +42,24 @@ r_narrow.connect_rooms(r_treasure, "n")
 r_treasure.connect_rooms(r_narrow, "s")
 
 # Adding items to rooms.
-Item.objects.all().delete()
-thing = Item(name='thing', description='just a thing')
+Item.objects.all().delete()  # Clear objects that may already exist in database to start with clean slate.
+Container.objects.all().delete()
+# Create a key for a container and put it somewhere.
+key = Item(name='key', description='I go to a box.', is_key=True, room=r_foyer)
+key.save()
+
+# Put the container somewhere and assign the key.
+chest = Container(name='Treasure Chest', description='An ornate treasure chest', room=r_outside, key=key)
+chest.save()
+
+# Put an item in a room,
+thing = Item(name='thing', description='just a thing', room=r_overlook)
 thing.save()
-r_outside.add_item(thing)
+
+# or a container.
+hidden_thing = Item(name='Hiding thing', description='I am hiding in a box.', container=chest)
+hidden_thing.save()
+
 
 players = Player.objects.all()
 for p in players:
