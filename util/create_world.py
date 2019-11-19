@@ -1,6 +1,4 @@
 # from django.contrib.auth.models import User
-import sys
-sys.path.append('../adventure')
 from adventure.models import Player, Room, Item, Container
 
 Room.objects.all().delete()
