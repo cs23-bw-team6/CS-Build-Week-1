@@ -18,8 +18,8 @@ import json
 @csrf_exempt
 @api_view(["GET"])
 def rooms(request):
-    ret = {room.id: room.dictionary() for room in Room.objects.all()}
-    return JsonResponse({'rooms': ret})
+    rooms_ = {room.id: room.dictionary() for room in Room.objects.all()}
+    return JsonResponse({'rooms': rooms_})
 
 
 @csrf_exempt
@@ -60,9 +60,11 @@ def move(request):
         next_room = Room.objects.get(id=next_room_id)
         player.currentRoom = next_room_id
         player.save()
+
+        # Below is all for the pusher stuff.
         players = next_room.player_names(player_id)
-        current_player_uui_ds = room.player_UUIDs(player_id)
-        next_player_uui_ds = next_room.player_UUIDs(player_id)
+        # current_player_uui_ds = room.player_UUIDs(player_id)
+        # next_player_uui_ds = next_room.player_UUIDs(player_id)
         # for p_uuid in current_player_uui_ds:
         #     pusher.trigger(f'p-channel-{p_uuid}', u'broadcast',
         #                    {'message': f'{player.user.username} has walked {dirs[direction]}.'})

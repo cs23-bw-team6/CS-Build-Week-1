@@ -13,6 +13,10 @@ class Item(models.Model):
     is_light = models.BooleanField(default=False)
     weight = models.IntegerField(default=1)
     seen = models.BooleanField(default=False)
+    is_key = models.BooleanField(default=False)
+    container = models.ForeignKey('Container', on_delete=models.CASCADE, blank=True, null=True)
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, blank=True, null=True)
+    player = models.ForeignKey('Player', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}\n{self.description}"
@@ -31,33 +35,30 @@ class Container(models.Model):
     description = models.CharField(max_length=50, default='Container Description')
     weight = models.IntegerField(default=50)
     seen = models.BooleanField(default=False)
-
-    key = models.BooleanField(default=None)
     locked = models.BooleanField(default=True)
-    items = models.ManyToManyField('Item')
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, blank=True, null=True)
+    key = models.OneToOneField('Item',
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True,
+                               related_name='key_to',
+                               )
 
     def dictionary(self):
         return {'name': self.name,
                 'description': self.description,
                 'weight': self.weight,
                 'seen': self.seen,
-                'key': self.key,
                 'locked': self.locked,
-                'items': {item.id: item.dictionary() for item in self.items.all()}
-        }
-
-    def add_item(self, item):
-        self.items.add(item)
-
-    def remove_item(self, item):
-        self.items.remove(item)
+                'key': {key.id: key.dictionary() for key in Item.objects.filter(is_key=True)},
+                'items': {item.id: item.dictionary() for item in Item.objects.filter(container=self.id)}
+                }
 
 
 class Room(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
     title = models.CharField(max_length=50, default="DEFAULT TITLE")
     description = models.CharField(max_length=500, default="DEFAULT DESCRIPTION")
-    items = models.ManyToManyField('Item')
     n_to = models.IntegerField(default=0)
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
@@ -69,7 +70,8 @@ class Room(models.Model):
     def dictionary(self):
         return {'title': self.title,
                 'description': self.description,
-                'items': {item.id: item.dictionary() for item in self.items.all()},
+                'items': {item.id: item.dictionary() for item in Item.objects.filter(room=self.id)},
+                'containers': {container.id: container.dictionary() for container in Container.objects.filter(room=self.id)},
                 'n_to': self.n_to,
                 's_to': self.s_to,
                 'e_to': self.e_to,
@@ -95,12 +97,6 @@ class Room(models.Model):
                 return
             self.save()
 
-    def add_item(self, item):
-        self.items.add(item)
-
-    def remove_item(self, item):
-        self.items.remove(item)
-
     def player_names(self, current_player_id):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
 
@@ -112,7 +108,6 @@ class Player(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_room = models.IntegerField(default=0)
-    items = models.ManyToManyField('Item')
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
 
     def __str__(self):
@@ -121,14 +116,8 @@ class Player(models.Model):
     def dictionary(self):
         return {'user': self.user,
                 'current_room': self.current_room,
-                'item': {item.id: item.dictionary() for item in self.items.all()},
+                'item': {item.id: item.dictionary() for item in Item.objects.filter(player=self.id)},
                 'uuid': self.uuid}
-
-    def add_item(self, item):
-        self.items.add(item)
-
-    def remove_item(self, item):
-        self.items.remove(item)
 
     def initialize(self):
         if self.current_room == 0:
