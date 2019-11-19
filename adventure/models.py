@@ -46,6 +46,12 @@ class Container(models.Model):
                 'items': {item.id: item.dictionary() for item in self.items.all()}
         }
 
+    def add_item(self, item):
+        self.items.add(item)
+
+    def remove_item(self, item):
+        self.items.remove(item)
+
 
 class Room(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
@@ -92,6 +98,9 @@ class Room(models.Model):
     def add_item(self, item):
         self.items.add(item)
 
+    def remove_item(self, item):
+        self.items.remove(item)
+
     def player_names(self, current_player_id):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
 
@@ -114,6 +123,12 @@ class Player(models.Model):
                 'current_room': self.current_room,
                 'item': {item.id: item.dictionary() for item in self.items.all()},
                 'uuid': self.uuid}
+
+    def add_item(self, item):
+        self.items.add(item)
+
+    def remove_item(self, item):
+        self.items.remove(item)
 
     def initialize(self):
         if self.current_room == 0:
