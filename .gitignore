@@ -3,6 +3,8 @@
 .DS_Store
 .env
 
+adventure/migrations/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
