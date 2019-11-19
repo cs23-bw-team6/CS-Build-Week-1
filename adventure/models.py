@@ -63,6 +63,8 @@ class Room(models.Model):
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
+    x = models.IntegerField(default=0)
+    y = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.title}\n{self.description}"
@@ -77,25 +79,22 @@ class Room(models.Model):
                 'e_to': self.e_to,
                 'w_to': self.w_to}
 
-    def connect_rooms(self, destination_room, direction):
-        destination_room_id = destination_room.id
-        try:
-            destination_room = Room.objects.get(id=destination_room_id)
-        except Room.DoesNotExist:
-            print("That room does not exist")
-        else:
-            if direction == "n":
-                self.n_to = destination_room_id
-            elif direction == "s":
-                self.s_to = destination_room_id
-            elif direction == "e":
-                self.e_to = destination_room_id
-            elif direction == "w":
-                self.w_to = destination_room_id
-            else:
-                print("Invalid direction")
-                return
-            self.save()
+    def connect_rooms(self, connecting_room, direction):
+        """
+        Connect two rooms in the given n/s/e/w direction
+        """
+        reverse_dirs = {"n": "s", "s": "n", "e": "w", "w": "e"}
+        reverse_dir = reverse_dirs[direction]
+        setattr(self, f"{direction}_to", connecting_room.id)
+        setattr(connecting_room, f"{reverse_dir}_to", self.id)
+        self.save()
+        connecting_room.save()
+
+    def get_room_in_direction(self, direction):
+        """
+        Connect two rooms in the given n/s/e/w direction
+        """
+        return getattr(self, f"{direction}_to")
 
     def player_names(self, current_player_id):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
