@@ -18,7 +18,7 @@ import json
 @csrf_exempt
 @api_view(["GET"])
 def rooms(request):
-    ret = {room.id: room.__dict__() for room in Room.objects.all()}
+    ret = {room.id: room.dictionary() for room in Room.objects.all()}
     return JsonResponse({'rooms': ret})
 
 
