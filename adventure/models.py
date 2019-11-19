@@ -7,6 +7,7 @@ import uuid
 
 
 class Item(models.Model):
+    # !!-- Be sure to add attributes to dictionary if adding here --!!
     name = models.CharField(max_length=50, default="Item Name")
     description = models.CharField(max_length=50, default='Item Description')
     is_light = models.BooleanField(default=False)
@@ -16,37 +17,38 @@ class Item(models.Model):
     def __str__(self):
         return f"{self.name}\n{self.description}"
 
-    def __dict__(self):
+    def dictionary(self):
         return {'name': self.name,
                 'description': self.description,
                 'is_light': self.is_light,
                 'weight': self.weight,
-                'active': self.active,
                 'seen': self.seen}
 
 
 class Container(models.Model):
+    # !!-- Be sure to add attributes to dictionary if adding here --!!
     name = models.CharField(max_length=50, default="Container Name")
     description = models.CharField(max_length=50, default='Container Description')
     weight = models.IntegerField(default=50)
     seen = models.BooleanField(default=False)
 
-    key = models.NullBooleanField(default=None)
+    key = models.BooleanField(default=None)
     locked = models.BooleanField(default=True)
     items = models.ManyToManyField('Item')
 
-    def __dict__(self):
+    def dictionary(self):
         return {'name': self.name,
                 'description': self.description,
                 'weight': self.weight,
                 'seen': self.seen,
                 'key': self.key,
                 'locked': self.locked,
-                'items': {item.id: item.__dict__() for item in self.items.all()}}
+                'items': {item.id: item.dictionary() for item in self.items.all()}
+        }
 
 
 class Room(models.Model):
-    # !!-- Be sure to add attributes to __dict__ --!!
+    # !!-- Be sure to add attributes to dictionary if adding here --!!
     title = models.CharField(max_length=50, default="DEFAULT TITLE")
     description = models.CharField(max_length=500, default="DEFAULT DESCRIPTION")
     items = models.ManyToManyField('Item')
@@ -58,10 +60,10 @@ class Room(models.Model):
     def __str__(self):
         return f"{self.title}\n{self.description}"
 
-    def __dict__(self):
+    def dictionary(self):
         return {'title': self.title,
                 'description': self.description,
-                'items': {item.id: item.__dict__() for item in self.items.all()},
+                'items': {item.id: item.dictionary() for item in self.items.all()},
                 'n_to': self.n_to,
                 's_to': self.s_to,
                 'e_to': self.e_to,
@@ -87,6 +89,9 @@ class Room(models.Model):
                 return
             self.save()
 
+    def add_item(self, item):
+        self.items.add(item)
+
     def player_names(self, current_player_id):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
 
@@ -95,6 +100,7 @@ class Room(models.Model):
 
 
 class Player(models.Model):
+    # !!-- Be sure to add attributes to dictionary if adding here --!!
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_room = models.IntegerField(default=0)
     items = models.ManyToManyField('Item')
@@ -103,10 +109,10 @@ class Player(models.Model):
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_login}"
 
-    def __dict(self):
+    def dictionary(self):
         return {'user': self.user,
                 'current_room': self.current_room,
-                'item': {item.id: item.__dict__() for item in self.items.all()},
+                'item': {item.id: item.dictionary() for item in self.items.all()},
                 'uuid': self.uuid}
 
     def initialize(self):
