@@ -32,8 +32,36 @@ def initialize(request):
     room = player.room()
     players = room.player_names(player_id)
     return JsonResponse(
-        {'uuid': uuid, 'name': player.user.username, 'title': room.title, 'description': room.description,
+        {'uuid': uuid,
+         'name': player.user.username,
+         'title': room.title,
+         'items': [item.name for item in room.item_set.all()],
+         'description': room.description,
          'players': players}, safe=True)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def use_item(request):
+    player = request.user.player
+    data = json.loads(request.body)
+    item = Item.objects.get(name=data['item'])
+    print('I am an item', item)
+    if item.player == player:
+        chest_name = "Chest of the" + item.name[10:]
+        print('I am a chest?', chest_name)
+        chest = Container.objects.get(name=chest_name)
+        chest.locked = False
+        for item in chest.item_set.all():
+            item.player = player
+            item.container = None
+            item.save()
+        player.save()
+        return JsonResponse({"name": player.user.username,
+                             'item': item.name,
+                             'description': item.description,
+                             'error_msg': ""})
+    return JsonResponse({"error_msg": "You don't have that item."})
 
 
 @csrf_exempt
