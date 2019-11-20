@@ -4,6 +4,8 @@
 .env
 cs23bwteam6.pem
 
+adventure/migrations/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
