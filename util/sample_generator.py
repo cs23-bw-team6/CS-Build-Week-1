@@ -5,8 +5,9 @@
 # procedural generation algorithm and use print_rooms()
 # to see the world.
 from adventure.models import Item, Container, Room
-from .name_generation import make_name
+from .name_generation import make_name, adj_noun
 from collections import deque
+import random
 
 
 class World:
@@ -106,13 +107,33 @@ class World:
 
         # Print string
         print(string)
+    
+    def seed_items(self, num_chest=5, max_room=None):
+        # pick a chest to put the treasure in
+        treasure_chest_number = random.randint(0, num_chest-1)
+        
+        for i in range(num_chest):
+            # create chest/key pairs
+            name = adj_noun()
+            key_name = name + " Key"
+            chest_name = name + " Chest"
+            k = Item(name=key_name, description="Maybe it opens a chest!", is_key=True)
+            c = Container(name=chest_name, description="Maybe there's treasure inside!", 
+            key=k, room=Room.objects.filter(id=random.randint(1, max_room))[0])
+            k.save()
+            c.save()
 
+            # put the treasure in the lucky chest
+            if i==treasure_chest_number:
+                the_treasure = Item(name="The Treasure", description="That thing you want", container=c)
+                the_treasure.save()
 
 w = World()
 num_rooms = 15
 width = 15
 height = 15
 w.generate_rooms(width, height, num_rooms)
+w.seed_items(max_room=num_rooms)
 w.print_rooms()
 
 print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {num_rooms}\n")
