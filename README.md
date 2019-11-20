@@ -80,30 +80,43 @@ More on Pusher below.
 These are implemented on the test server: `https://lambda-mud-test.herokuapp.com/`.
 
 ### Registration
-* `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password":"testpassword"}' localhost:8000/api/registration/`
+* `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password1":"testpassword", "password2":"testpassword"}' localhost:8000/api/registration/`
 * Response:
-  * `{"key":"6b7b9d0f33bd76e75b0a52433f268d3037e42e66"}`
+  * `{"key":"e56b14f940dbe49f29ac1e0eafebefbdf34461aa"}`
 
 ### Login
 * Request:
   * `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password":"testpassword"}' localhost:8000/api/login/`
 * Response:
-  * `{"key":"6b7b9d0f33bd76e75b0a52433f268d3037e42e66"}`
+  * `{"key":"e56b14f940dbe49f29ac1e0eafebefbdf34461aa"}`
 
 ### Initialize
 * Request:  (Replace token string with logged in user's auth token)
-  * `curl -X GET -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' localhost:8000/api/adv/init/`
+  * `curl -X GET -H 'Authorization: Token e56b14f940dbe49f29ac1e0eafebefbdf34461aa' localhost:8000/api/adv/init/` 
 * Response:
-  * `{"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "Outside Cave Entrance", "description": "North of you, the cave mount beckons", "players": []}`
+  * `{"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "room_title", "description": "room_description", "items": [item_names], "containers": [container_names], "players": [player_names]}`
 
 ### Move
 * Request:  (Replace token string with logged in user's auth token)
-  * `curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/`
+  * `curl -X POST -H 'Authorization: Token e56b14f940dbe49f29ac1e0eafebefbdf34461aa' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/`
 * Response:
-  * `{"name": "testuser", "title": "Foyer", "description": "Dim light filters in from the south. Dusty\npassages run north and east.", "players": [], "error_msg": ""}`
+  * `{"name": "testuser", "title": "Foyer", "description": "room_description", "items": [item_names], "containers": [container_names], "players": [player_names], "error_msg": ""}`
 * Pusher broadcast (stretch):
   * Players in previous room receive a message: `<name> has walked north.`
   * Players in next room receive a message: `<name> has entered from the south.`
+
+
+### Get_item
+* Request: (Replace token string with logged in user's auth token)
+    * `curl -X POST -H 'Authorization: Token e56b14f940dbe49f29ac1e0eafebefbdf34461aa' -H "Content-Type: application/json" -d '{"item":"item_name"}' localhost:8000/api/adv/get_item/`
+* Response:
+    * `{"name": "testuser", "item": "item_name", "description": "item_description, "error_msg": ""}`
+
+### Use_item
+* Request: (Replace token string with logged in user's auth token)
+    * `curl -X POST -H 'Authorization: Token e56b14f940dbe49f29ac1e0eafebefbdf34461aa' -H "Content-Type: application/json" -d '{"item":"item_name"}' localhost:8000/api/adv/use_item/`
+* Response:
+    * `{"name": "testuser", "item": "item_name", "description": "item_description, "error_msg": ""}`
 
 ### Say (stretch)
 * Request:  (Replace token string with logged in user's auth token)

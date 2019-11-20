@@ -14,3 +14,7 @@ nouns = ['Orc', 'Phoenix', 'Army', 'Tombs', 'Elf', 'Goblin', 'Kobold', 'Dwarf', 
 def make_name():
     name = f"{random.choice(room_types)} of the {random.choice(adjectives)} {random.choice(nouns)}"
     return name
+
+def adj_noun():
+    name = f"{random.choice(adjectives)} {random.choice(nouns)}"
+    return name

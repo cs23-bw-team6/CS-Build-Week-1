@@ -50,7 +50,7 @@ class Container(models.Model):
                 'weight': self.weight,
                 'seen': self.seen,
                 'locked': self.locked,
-                'key': {key.id: key.dictionary() for key in Item.objects.filter(is_key=True)},
+                'key': {key.id: key.name for key in Item.objects.filter(is_key=True) if key.id == self.id},
                 'items': {item.id: item.dictionary() for item in Item.objects.filter(container=self.id)}
                 }
 
@@ -74,6 +74,7 @@ class Room(models.Model):
                 'description': self.description,
                 'items': {item.id: item.dictionary() for item in Item.objects.filter(room=self.id)},
                 'containers': {container.id: container.dictionary() for container in Container.objects.filter(room=self.id)},
+                'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=self.id)},
                 'n_to': self.n_to,
                 's_to': self.s_to,
                 'e_to': self.e_to,
@@ -97,10 +98,10 @@ class Room(models.Model):
         return getattr(self, f"{direction}_to")
 
     def player_names(self, current_player_id):
-        return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
+        return [p.user.username for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
     def player_UUIDs(self, current_player_id):
-        return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
+        return [p.uuid for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
 
 class Player(models.Model):
@@ -113,9 +114,9 @@ class Player(models.Model):
         return f"{self.user.first_name} {self.user.last_login}"
 
     def dictionary(self):
-        return {'user': self.user,
+        return {'user': self.user.username,
                 'current_room': self.current_room,
-                'item': {item.id: item.dictionary() for item in Item.objects.filter(player=self.id)},
+                'items': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
                 'uuid': self.uuid}
 
     def initialize(self):
