@@ -26,7 +26,7 @@ class World:
             self.grid[i] = [None] * size_x
 
         mid_y = (size_y // 2)
-        mid_x = (size_x // 2)
+        mid_x = (size_x // 2) - 1
 
         first = Room(title=make_name(), x=mid_x, y=mid_y)
         first.save()
