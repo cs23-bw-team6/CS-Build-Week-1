@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.scss';
 
+// process.env.REACT_APP_BACKEND = 'https://treasure-hunting-cs23.herokuapp.com';
+
 const Login = () => {
-	const baseUrl = process.env.REACT_APP_BACKEND;
+	const baseUrl = 'https://treasure-hunting-cs23.herokuapp.com';
 
 	const [newUser, setNewUser] = useState(true);
 
@@ -22,11 +24,12 @@ const Login = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		const postUrl = newUser ? `${baseUrl}/registration/` : `${baseUrl}/login/`;
+		const postUrl = newUser ? `${baseUrl}/api/registration/` : `${baseUrl}/login/`;
 		const postData = newUser
 			? formData
 			: { username: formData.username, password: formData.password1 };
 		try {
+			console.log(postData);
 			const res = await axios.post(postUrl, postData);
 			window.localStorage.setItem('token', res.data.key);
 		} catch (err) {

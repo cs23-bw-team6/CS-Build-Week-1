@@ -12,7 +12,7 @@ function App() {
 				<img src={oldMap} alt="old map with scope and compass" />
 			</section>
 			<Login />
-			<Map />
+			{/* <Map /> */}
 		</div>
 	);
 }

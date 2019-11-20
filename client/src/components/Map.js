@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 const Map = () => {
@@ -12,8 +12,8 @@ const Map = () => {
         }
         
     }
-    const map = download_map()
-    console.log(map)
+    const map = download_map();
+    console.log(map);
     return (
         <div>
 
