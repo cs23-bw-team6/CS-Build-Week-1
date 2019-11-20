@@ -47,19 +47,18 @@ def use_item(request):
     player = request.user.player
     data = json.loads(request.body)
     item = Item.objects.get(name=data['item'])
-    print('I am an item', item)
     if item.player == player:
         chest_name = "Chest of the" + item.name[10:]
-        print('I am a chest?', chest_name)
         chest = Container.objects.get(name=chest_name)
         chest.locked = False
-        for item in chest.item_set.all():
-            item.player = player
-            item.container = None
-            item.save()
+
+        chest_item = chest.item_set.all()
+        chest_item.player = player
+        chest_item.container = None
+        chest_item.save()
         return JsonResponse({"name": player.user.username,
-                             'item': item.name,
-                             'description': item.description,
+                             'item': chest_item.name,
+                             'description': chest_item.description,
                              'error_msg': ""})
     return JsonResponse({"error_msg": "You don't have that item."})
 
