@@ -114,9 +114,9 @@ class Player(models.Model):
         return f"{self.user.first_name} {self.user.last_login}"
 
     def dictionary(self):
-        return {'user': self.user,
+        return {'user': self.user.username,
                 'current_room': self.current_room,
-                'item': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
+                'items': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
                 'uuid': self.uuid}
 
     def initialize(self):
