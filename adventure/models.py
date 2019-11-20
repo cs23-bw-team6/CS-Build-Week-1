@@ -74,6 +74,7 @@ class Room(models.Model):
                 'description': self.description,
                 'items': {item.id: item.dictionary() for item in Item.objects.filter(room=self.id)},
                 'containers': {container.id: container.dictionary() for container in Container.objects.filter(room=self.id)},
+                'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=self.id)},
                 'n_to': self.n_to,
                 's_to': self.s_to,
                 'e_to': self.e_to,
@@ -115,7 +116,7 @@ class Player(models.Model):
     def dictionary(self):
         return {'user': self.user,
                 'current_room': self.current_room,
-                'item': {item.id: item.dictionary() for item in Item.objects.filter(player=self.id)},
+                'item': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
                 'uuid': self.uuid}
 
     def initialize(self):
