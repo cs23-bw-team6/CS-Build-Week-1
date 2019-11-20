@@ -37,6 +37,7 @@ def initialize(request):
          'title': room.title,
          'description': room.description,
          'items': [item.name for item in room.item_set.all()],
+         'containers': [container.name for container in room.container_set.all()],
          'players': players}, safe=True)
 
 
@@ -125,6 +126,7 @@ def move(request):
              'title': next_room.title,
              'description': next_room.description,
              'items': [item.name for item in room.item_set.all()],
+             'containers': [container.name for container in room.container_set.all()],
              'players': players,
              'error_msg': ""},
             safe=True)
@@ -135,6 +137,7 @@ def move(request):
              'title': room.title,
              'description': room.description,
              'items': [item.name for item in room.item_set.all()],
+             'containers': [container.name for container in room.container_set.all()],
              'players': players,
              'error_msg': "You cannot move that way."},
             safe=True)
