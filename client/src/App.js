@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './components/Login';
+import Map from './components/Map';
 import oldMap from './assets/map.png';
 import './App.scss';
 
@@ -11,6 +12,7 @@ function App() {
 				<img src={oldMap} alt="old map with scope and compass" />
 			</section>
 			<Login />
+			<Map />
 		</div>
 	);
 }
