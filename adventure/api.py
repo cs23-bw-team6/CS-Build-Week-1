@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from decouple import config
 from django.contrib.auth.models import User
+from util.world import seed_players, seed_items
 from .models import *
 from rest_framework.decorators import api_view
 import json
@@ -14,6 +15,14 @@ import json
 #                 key=config('PUSHER_KEY'),
 #                 secret=config('PUSHER_SECRET'),
 #                 cluster=config('PUSHER_CLUSTER'))
+
+@csrf_exempt
+@api_view(["GET"])
+def spawn(request):
+    seed_items(num_rooms=Room.objects.count(), num_chests=Container.objects.count())
+    seed_players(num_rooms=Room.objects.count())
+    return JsonResponse({"World": "re-spawned."})
+
 
 @csrf_exempt
 @api_view(["GET"])
