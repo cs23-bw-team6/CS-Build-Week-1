@@ -35,8 +35,8 @@ def initialize(request):
         {'uuid': uuid,
          'name': player.user.username,
          'title': room.title,
-         'items': [item.name for item in room.item_set.all()],
          'description': room.description,
+         'items': [item.name for item in room.item_set.all()],
          'players': players}, safe=True)
 
 
@@ -56,7 +56,6 @@ def use_item(request):
             item.player = player
             item.container = None
             item.save()
-        player.save()
         return JsonResponse({"name": player.user.username,
                              'item': item.name,
                              'description': item.description,
