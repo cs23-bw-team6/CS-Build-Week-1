@@ -34,6 +34,7 @@ class World:
         queue.append(first)
         print('I am first', first.id)
         room_count = 1
+        level = 0
         while room_count < num_rooms:
             current_room = queue.popleft()
             for direction, delta_x, delta_y in zip(['n', 'w', 's', 'e'], [0, 1, 0, -1], [-1, 0, 1, 0]):
@@ -53,6 +54,9 @@ class World:
                         current_room.connect_rooms(next_room, direction)
                         queue.append(next_room)
                         room_count += 1
+                    if level & 1:
+                        current_room = queue.popleft()
+            level += 1
 
     def print_rooms(self):
         """
@@ -107,31 +111,37 @@ class World:
 
         # Print string
         print(string)
-    
+
     def seed_items(self, num_chest=5, max_room=None):
         # pick a chest to put the treasure in
-        treasure_chest_number = random.randint(0, num_chest-1)
-        
+        treasure_chest_number = random.randint(0, num_chest - 1)
+
         for i in range(num_chest):
             # create chest/key pairs
             name = adj_noun()
-            key_name = name + " Key"
-            chest_name = name + " Chest"
-            k = Item(name=key_name, description="Maybe it opens a chest!", is_key=True)
-            c = Container(name=chest_name, description="Maybe there's treasure inside!", 
-            key=k, room=Room.objects.filter(id=random.randint(1, max_room))[0])
+            key_name = "Key of the " + name
+            chest_name = "Chest of the " + name
+            k = Item(name=key_name,
+                     description="Maybe it opens a chest!",
+                     room=Room.objects.filter(id=random.randint(1, max_room))[0],
+                     is_key=True)
+            c = Container(name=chest_name,
+                          description="Maybe there's treasure inside!",
+                          key=k,
+                          room=Room.objects.filter(id=random.randint(1, max_room))[0])
             k.save()
             c.save()
 
             # put the treasure in the lucky chest
-            if i==treasure_chest_number:
+            if i == treasure_chest_number:
                 the_treasure = Item(name="The Treasure", description="That thing you want", container=c)
                 the_treasure.save()
 
+
 w = World()
 num_rooms = 15
-width = 15
-height = 15
+width = 10
+height = 10
 w.generate_rooms(width, height, num_rooms)
 w.seed_items(max_room=num_rooms)
 w.print_rooms()
