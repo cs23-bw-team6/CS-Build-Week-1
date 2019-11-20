@@ -33,7 +33,7 @@ class World:
         self.grid[first.y][first.x] = first.id
         queue = deque()
         queue.append(first)
-        while self.room_count < num_rooms:
+        while self.room_count < self.num_rooms:
             current_room = queue.popleft()
             for direction, delta_x, delta_y in zip(['n', 'w', 's', 'e'], [0, 1, 0, -1], [-1, 0, 1, 0]):
                 if not eval(f'current_room.{direction}_to'):
@@ -121,43 +121,49 @@ class World:
             k.save()
             c.save()
 
-    def seed_items(self):
-        """Add keys and chests to random rooms.
-        Put the treasure in the lucky chest.
-        """
-        for i in range(1, self.num_chests):
-            key = Item.objects.get(id=i)
-            chest = Container.objects.get(id=i)
-            key.room = Room.objects.get(id=random.randint(1, self.num_rooms))
-            chest.room = Room.objects.get(id=random.randint(1, self.num_rooms))
-            key.save()
-            chest.save()
+def seed_items(num_chests, num_rooms):
+    """Add keys and chests to random rooms.
+    Put the treasure in the lucky chest.
+    """
+    for i in range(1, num_chests):
+        key = Item.objects.get(id=i)
+        chest = Container.objects.get(id=i)
+        key.room = Room.objects.get(id=random.randint(1, num_rooms))
+        chest.room = Room.objects.get(id=random.randint(1, num_rooms))
+        key.save()
+        chest.save()
 
-        lucky_chest_number = random.randint(1, self.num_chests)
-        the_treasure = Item(name="The Treasure",
-                            description="That thing you want",
-                            container=Container.objects.get(id=lucky_chest_number))
-        the_treasure.save()
-
-    def seed_players(self):
-        players = Player.objects.all()
-        start_room = random.randint(1, self.num_rooms)
-        for p in players:
-            p.currentRoom = start_room
-            p.save()
+    lucky_chest_number = random.randint(1, num_chests)
+    the_treasure = Item(name="The Treasure",
+                        description="That thing you want",
+                        container=Container.objects.get(id=lucky_chest_number))
+    the_treasure.save()
 
 
-num_rooms = 10
-width = 5
-height = 5
-num_chest = 5
+def seed_players(num_rooms):
+    players = Player.objects.all()
+    start_room = random.randint(1, num_rooms)
+    for p in players:
+        p.currentRoom = start_room
+        p.save()
 
-w = World(width, height, num_rooms, num_chest)
-w.generate_rooms()
-w.print_rooms()
-w.create_items()
-w.seed_items()
-w.seed_players()
 
-print('World Created!! Good Job!')
-print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
+def main():
+    num_rooms = 10
+    width = 5
+    height = 5
+    num_chest = 5
+
+    w = World(width, height, num_rooms, num_chest)
+    w.generate_rooms()
+    w.print_rooms()
+    w.create_items()
+    seed_items(num_chests=num_chest, num_rooms=num_rooms)
+    seed_players(num_rooms=num_rooms)
+
+    print('World Created!! Good Job!')
+    print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
+
+
+if __name__ == "__main__":
+    main()
