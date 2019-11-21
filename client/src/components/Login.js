@@ -31,7 +31,7 @@ const Login = () => {
         }
       : { username: formData.username, password: formData.password };
     try {
-      console.log(postUrl);
+      console.log(postData);
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
       window.location.reload();
