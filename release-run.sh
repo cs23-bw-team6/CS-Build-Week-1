@@ -1,3 +1,3 @@
 ./manage.py makemigrations
 ./manage.py migrate
-./manage.py ./create_world.py
+./manage.py shell ./create_world.py
