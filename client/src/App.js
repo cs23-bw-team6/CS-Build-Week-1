@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './components/Login';
 import Game from './components/Game';
-import './App.scss';
+import './scss/App.scss';
 
 function App() {
   const token = window.localStorage.getItem('token');

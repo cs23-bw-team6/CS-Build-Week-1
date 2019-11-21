@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import oldMap from '../assets/map.png';
-import './Login.scss';
+import '../scss/Login.scss';
 
 const Login = () => {
   const baseUrl = process.env.REACT_APP_BACKEND;
