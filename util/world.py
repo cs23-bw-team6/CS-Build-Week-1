@@ -15,7 +15,10 @@ def flatten_grid(grid):
     flat_list = []
     for row in grid:
         for room in row:
-            flat_list.append(room.dictionary())
+            if room not None:
+                flat_list.append(room.dictionary())
+            else:
+                flat_list.append(None)
     return flat_list
 
 
