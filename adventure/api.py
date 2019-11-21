@@ -41,6 +41,7 @@ def initialize(request):
     Reset player score to 0.
     """
     user = request.user
+    print('user', user)
     player = user.player
     player_id = player.id
     uuid = player.uuid
@@ -121,17 +122,14 @@ def get_item(request):
     item = Item.objects.get(name=data['item'])
     # Check that the item is in the player's current room.
     if item.room:
-        # Make sure the item isn't a chest.
-        if item.is_key:
-            item.room = None
-            item.player = player
-            item.save()
-            return JsonResponse({'name': player.user.username,
-                                 'item': item.name,
-                                 'description': item.description,
-                                 'error_msg': "Error in get_item"},
-                                safe=True)
-        return JsonResponse({'error_msg': 'Chests are too heavy.'}, safe=True)
+        item.room = None
+        item.player = player
+        item.save()
+        return JsonResponse({'name': player.user.username,
+                             'item': item.name,
+                             'description': item.description,
+                             'error_msg': "Error in get_item"},
+                            safe=True)
     return JsonResponse({'error_msg': "I don't see that here"}, safe=True)
 
 
@@ -157,9 +155,9 @@ def move(request):
         next_room_id = room.n_to
     elif direction == "s":
         next_room_id = room.s_to
-    elif direction == "e":
-        next_room_id = room.e_to
     elif direction == "w":
+        next_room_id = room.e_to
+    elif direction == "e":
         next_room_id = room.w_to
     if next_room_id:
         next_room = Room.objects.get(id=next_room_id)
