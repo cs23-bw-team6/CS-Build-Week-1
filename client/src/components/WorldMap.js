@@ -10,7 +10,9 @@ const WorldMap = ({ rooms }) => {
           return (
             <div
               className={
-                room.players[2] ? 'WorldMap__room active' : 'WorldMap__room'
+                Object.keys(room.players).length > 0
+                  ? 'WorldMap__room active'
+                  : 'WorldMap__room'
               }
               key={`${room.x}${room.y}`}
               style={{
