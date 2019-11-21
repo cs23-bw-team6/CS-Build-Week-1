@@ -4,7 +4,7 @@ import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
 
 const Login = () => {
-  const baseUrl = process.env.REACT_APP_BACKEND;
+  const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-live.s3-us-west-2.amazonaws.com/';
 
   const [newUser, setNewUser] = useState(true);
 

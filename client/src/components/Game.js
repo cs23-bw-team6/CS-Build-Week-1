@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import oldMap from '../assets/map.png';
 import Compass from './Compass';
+import axios from 'axios';
 import '../scss/Game.scss';
 
-const baseUrl = process.env.REACT_APP_BACKEND
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-live.s3-us-west-2.amazonaws.com/';
 
 const initializeUser = async token => {
 	let user = {}
-	const postUrl = `${baseUrl}/api/adv/initialize/`;
+	const postUrl = `${baseUrl}api/adv/initialize/`;
 	try{
 		user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`} });
 	} catch(err) {
