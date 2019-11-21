@@ -31,7 +31,7 @@ const Login = (token, setActiveComponent) => {
     try {
       const res = await axios.post(postUrl, postData, { 'headers': {'Access-Control-Allow-Origin': '*'}});
       window.localStorage.setItem('token', res.data.key);
-      setActiveComponent(Game);
+      setActiveComponent.setActiveComponent(Game);
     } catch (err) {
       console.error(err);
     }
