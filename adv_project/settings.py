@@ -191,6 +191,6 @@ LOGGING = {
         }
     }
 }
-if DEBUG==False:
-    import django_heroku
-    django_heroku.settings(locals(), logging=False)
+
+import django_heroku
+django_heroku.settings(locals(), logging=False)
