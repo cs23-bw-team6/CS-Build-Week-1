@@ -80,30 +80,54 @@ More on Pusher below.
 These are implemented on the test server: `https://lambda-mud-test.herokuapp.com/`.
 
 ### Registration
-* `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password":"testpassword"}' localhost:8000/api/registration/`
+* `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password1":"testpassword", "password2":"testpassword"}' localhost:8000/api/registration/`
 * Response:
-  * `{"key":"6b7b9d0f33bd76e75b0a52433f268d3037e42e66"}`
+  * `{"key":"ba4b58013ea213a376de4654be5612e4ce51ffe9"}`
 
 ### Login
 * Request:
   * `curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser", "password":"testpassword"}' localhost:8000/api/login/`
 * Response:
-  * `{"key":"6b7b9d0f33bd76e75b0a52433f268d3037e42e66"}`
+  * `{"key":"ba4b58013ea213a376de4654be5612e4ce51ffe9"}`
 
 ### Initialize
 * Request:  (Replace token string with logged in user's auth token)
-  * `curl -X GET -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' localhost:8000/api/adv/init/`
+  * `curl -X GET -H 'Authorization: Token ba4b58013ea213a376de4654be5612e4ce51ffe9' localhost:8000/api/adv/init/` 
 * Response:
-  * `{"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "Outside Cave Entrance", "description": "North of you, the cave mount beckons", "players": []}`
+  * `{"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "room_title", "description": "room_description", "items": [item_names], "containers": [container_names], "players": [player_names]}`
 
 ### Move
 * Request:  (Replace token string with logged in user's auth token)
-  * `curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/`
+  * `curl -X POST -H 'Authorization: Token ba4b58013ea213a376de4654be5612e4ce51ffe9' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/`
 * Response:
-  * `{"name": "testuser", "title": "Foyer", "description": "Dim light filters in from the south. Dusty\npassages run north and east.", "players": [], "error_msg": ""}`
+  * `{"name": "testuser", "title": "Foyer", "description": "room_description", "items": [item_names], "containers": [container_names], "players": [player_names], "error_msg": ""}`
 * Pusher broadcast (stretch):
   * Players in previous room receive a message: `<name> has walked north.`
   * Players in next room receive a message: `<name> has entered from the south.`
+
+### Rooms
+* Request:
+    * `curl -X GET localhost:8000/api/adv/rooms/`
+* Response:
+    * `{"rooms": {"1": {"title": "Drawing Room of the Ferocious Bandersnatch", "description": "DEFAULT DESCRIPTION", "items": {"1": {"name": "Key of the Menacing Halfling", "description": "Maybe it opens the Chest of the Menacing Halfling!", "is_light": false, "weight": 1, "seen": false}}, "containers": {}, "players": {}, "n_to": 2, "s_to": 4, "e_to": 5, "w_to": 3},...`
+
+### Spawn
+* Request: (Re-spawns players(all in the same) and items(all in different) in random rooms.)
+    * `curl -X GET localhost:8000/api/adv/spawn/`
+* Response:
+    * `"World": "re-spawned."`
+
+### Get_item
+* Request: (Replace token string with logged in user's auth token)
+    * `curl -X POST -H 'Authorization: Token ba4b58013ea213a376de4654be5612e4ce51ffe9' -H "Content-Type: application/json" -d '{"item":"item_name"}' localhost:8000/api/adv/get_item/`
+* Response:
+    * `{"name": "testuser", "item": "item_name", "description": "item_description, "error_msg": ""}`
+
+### Use_item
+* Request: (Replace token string with logged in user's auth token)
+    * `curl -X POST -H 'Authorization: Token ba4b58013ea213a376de4654be5612e4ce51ffe9' -H "Content-Type: application/json" -d '{"item":"item_name"}' localhost:8000/api/adv/use_item/`
+* Response:
+    * `{"name": "testuser", "score": user.score, "high_score": user.high_score, "error_msg": ""}`
 
 ### Say (stretch)
 * Request:  (Replace token string with logged in user's auth token)

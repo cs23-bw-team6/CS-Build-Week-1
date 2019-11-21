@@ -1,0 +1,15 @@
+.Compass {
+  display: grid;
+  grid-template-columns: 4rem 4rem 4rem;
+  grid-template-rows: 4rem 4rem 4rem;
+  img {
+    width: 4rem;
+    opacity: 1;
+    &.clickable {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
