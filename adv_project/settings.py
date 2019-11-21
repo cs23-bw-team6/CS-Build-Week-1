@@ -87,14 +87,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'adv_project.wsgi.application'
 
 
-
-
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-STATIC_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
-
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -141,10 +133,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-CSRF_COOKIE_NAME = "csrftoken"
-
 CORS_ORIGIN_ALLOW_ALL=True
-
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -157,6 +146,11 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'Access-Control-Allow-Origin',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'https://treasure-hunting-cs23.herokuapp.com/'
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -175,8 +169,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-# STATIC_ROOT = os.path.join(BASE_DIR, '/client/build/')
-# STATIC_URL = os.path.join(BASE_DIR, '/client/build/')
+STATIC_ROOT = os.path.join(BASE_DIR, '/client/build/')
+STATIC_URL = os.path.join(BASE_DIR, '/client/build/')
 
 LOGGING = {
     'version': 1,
