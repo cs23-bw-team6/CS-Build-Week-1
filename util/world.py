@@ -121,6 +121,7 @@ class World:
             k.save()
             c.save()
 
+
 def seed_items(num_chests, num_rooms):
     """Add keys and chests to random rooms.
     Put the treasure in the lucky chest.
@@ -128,6 +129,8 @@ def seed_items(num_chests, num_rooms):
     for i in range(1, num_chests):
         key = Item.objects.get(id=i)
         chest = Container.objects.get(id=i)
+        key.player = None
+        chest.player = None
         key.room = Room.objects.get(id=random.randint(1, num_rooms))
         chest.room = Room.objects.get(id=random.randint(1, num_rooms))
         key.save()
