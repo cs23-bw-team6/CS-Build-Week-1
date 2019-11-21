@@ -4,7 +4,7 @@ import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
 
 const Login = () => {
-  const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-live.s3-us-west-2.amazonaws.com/';
+  const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
   const [newUser, setNewUser] = useState(true);
 
@@ -31,6 +31,7 @@ const Login = () => {
         }
       : { username: formData.username, password: formData.password };
     try {
+      console.log(postUrl);
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
       window.location.reload();

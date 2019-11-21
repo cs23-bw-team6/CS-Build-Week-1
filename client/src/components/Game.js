@@ -4,7 +4,7 @@ import Compass from './Compass';
 import axios from 'axios';
 import '../scss/Game.scss';
 
-const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-live.s3-us-west-2.amazonaws.com/';
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
 const initializeUser = async token => {
 	let user = {}
