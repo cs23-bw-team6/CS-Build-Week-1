@@ -58,7 +58,7 @@ class Container(models.Model):
 class Room(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
     title = models.CharField(max_length=500, default="DEFAULT TITLE")
-    description = models.CharField(max_length=2000, default="DEFAULT DESCRIPTION")
+    description = models.CharField(max_length=500, default="DEFAULT DESCRIPTION")
     n_to = models.IntegerField(default=0)
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
