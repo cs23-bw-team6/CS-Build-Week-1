@@ -4,11 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from decouple import config
 from django.contrib.auth.models import User
-from util.world import seed_players, seed_items
+from util.world import seed_players, seed_items, seed_world
 from .models import *
 from rest_framework.decorators import api_view
 import json
-import util.world
+
+seed_world()
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'),

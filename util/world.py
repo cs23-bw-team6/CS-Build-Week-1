@@ -151,18 +151,22 @@ def seed_players(num_rooms):
         p.save()
 
 
+def seed_world():
+    num_rooms = 10
+    width = 5
+    height = 5
+    num_chest = 5
 
-num_rooms = 10
-width = 5
-height = 5
-num_chest = 5
+    w = World(width, height, num_rooms, num_chest)
+    w.generate_rooms()
+    w.print_rooms()
+    w.create_items()
+    seed_items(num_chests=num_chest, num_rooms=num_rooms)
+    seed_players(num_rooms=num_rooms)
 
-w = World(width, height, num_rooms, num_chest)
-w.generate_rooms()
-w.print_rooms()
-w.create_items()
-seed_items(num_chests=num_chest, num_rooms=num_rooms)
-seed_players(num_rooms=num_rooms)
+    print('World Created!! Good Job!')
+    print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
 
-print('World Created!! Good Job!')
-print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
+
+if __name__ == "__main__":
+    seed_world()
