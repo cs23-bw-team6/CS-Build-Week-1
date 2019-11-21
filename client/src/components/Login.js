@@ -4,7 +4,7 @@ import './Login.scss';
 
 // process.env.REACT_APP_BACKEND = 'https://treasure-hunting-cs23.herokuapp.com';
 
-const Login = () => {
+const Login = (user, setUser) => {
 	const baseUrl = 'https://treasure-hunting-cs23.herokuapp.com';
 
 	const [newUser, setNewUser] = useState(true);
