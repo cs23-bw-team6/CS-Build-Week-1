@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -151,10 +152,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = os.path.join(BASE_DIR, '/static/')
-STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
-
-import sys
+STATIC_ROOT = os.path.join(BASE_DIR, '/client/build/')
+STATIC_URL = os.path.join(BASE_DIR, '/client/build/')
 
 LOGGING = {
     'version': 1,

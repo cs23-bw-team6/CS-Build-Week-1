@@ -8,7 +8,7 @@ from util.world import seed_players, seed_items
 from .models import *
 from rest_framework.decorators import api_view
 import json
-
+from util.world import World
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'),
