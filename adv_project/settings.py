@@ -26,6 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
+
 ALLOWED_HOSTS = []
 
 
@@ -184,6 +185,6 @@ LOGGING = {
         }
     }
 }
-
-import django_heroku
-django_heroku.settings(locals(), logging=False)
+if DEBUG==False:
+    import django_heroku
+    django_heroku.settings(locals(), logging=False)

@@ -10,6 +10,16 @@ from collections import deque
 import random
 
 
+# Not complicated, only need to unpack small 2d arrays though
+def flatten_grid(grid):
+    flat_list = []
+    for row in grid:
+        for room in row:
+            flat_list.append(room.dictionary())
+    return flat_list
+
+
+
 class World:
     def __init__(self, size_x, size_y, num_rooms, num_chests):
         self.grid = None
@@ -18,6 +28,9 @@ class World:
         self.room_count = 1
         self.num_rooms = num_rooms
         self.num_chests = num_chests
+
+    def get_rooms(self):
+        return flatten_grid(self.grid)
 
     def generate_rooms(self):
         # Initialize the grid
@@ -166,7 +179,7 @@ def seed_world():
 
     print('World Created!! Good Job!')
     print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
-
+    return w
 
 if __name__ == "__main__":
     seed_world()

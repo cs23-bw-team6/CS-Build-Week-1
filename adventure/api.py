@@ -9,7 +9,7 @@ from util.world import seed_players, seed_items, seed_world
 from rest_framework.decorators import api_view
 import json
 
-seed_world()
+world = seed_world()
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'),
@@ -28,7 +28,8 @@ def spawn(request):
 @csrf_exempt
 @api_view(["GET"])
 def rooms(request):
-    rooms_ = {room.id: room.dictionary() for room in Room.objects.all()}
+    # rooms_ = {room.id: room.dictionary() for room in Room.objects.all()}
+    rooms_ = world.get_rooms()
     return JsonResponse({'rooms': rooms_})
 
 

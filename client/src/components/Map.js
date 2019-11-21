@@ -4,22 +4,30 @@ const BASE_URL = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23
 
 
 const Map = () => {
-    const [map, setMap] = useState('');
-    const download_map = async () => {
+    const [rooms, setRooms] = useState('');
+    const [grid, setGrid] = useState([]);
+
+    const download_rooms = async () => {
         const url = `${BASE_URL}api/adv/rooms/`;
         try {
             const new_map = await axios.get(url);
-            setMap(new_map.data.rooms);
+            setRooms(new_map.data.rooms);
         } catch(err) {
             return console.error(err);
         }
         
     }
-    if (map === '') {
-        download_map();
+    if (rooms === '') {
+        download_rooms();
     }
-    if (!(map==='')) {
-        console.log(map);
+    if (!(rooms==='')) {
+        console.log(rooms);
+        for (let i in rooms) {
+            let dupeGrid = grid;
+            dupeGrid[rooms[i].x][rooms[i].y] = rooms[i];
+            setGrid(dupeGrid);
+        }
+        console.log(grid);
     }
     return (
         <div>
