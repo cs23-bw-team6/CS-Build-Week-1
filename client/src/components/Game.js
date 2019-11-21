@@ -4,10 +4,19 @@ import Compass from './Compass';
 import '../scss/Game.scss';
 
 const Game = () => {
+  function logout() {
+    window.localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <section className="Game">
       <header className="Game__header">
-        <img src={oldMap} alt="old map with scope and compass" />
+        <img
+          onClick={logout}
+          src={oldMap}
+          alt="old map with scope and compass"
+        />
         <h1>ADVENTURE GAME</h1>
       </header>
 

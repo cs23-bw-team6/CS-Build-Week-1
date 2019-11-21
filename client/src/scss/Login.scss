@@ -24,25 +24,28 @@
   p {
     cursor: pointer;
     padding: 1rem;
+    text-align: center;
+    width: 50%;
     &:hover {
       background: white;
     }
     &.active {
-      background: black;
+      background: sienna;
       color: white;
     }
   }
 }
 
 .Login__form {
+  align-items: center;
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
+  justify-content: center;
 
   button {
     cursor: pointer;
     padding: 1rem;
-    width: 222px;
+    width: 50%;
     &:hover {
       background: beige;
     }
