@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import oldMap from '../assets/map.png';
+import Game from './Game';
 import '../scss/Login.scss';
 
-const Login = () => {
+const Login = (token, setActiveComponent) => {
   const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
   const [newUser, setNewUser] = useState(true);
@@ -29,9 +30,8 @@ const Login = () => {
       : { username: formData.username, password: formData.password1 };
     try {
       const res = await axios.post(postUrl, postData);
-      console.log(res);
       window.localStorage.setItem('token', res.data.key);
-      window.location.reload();
+      setActiveComponent(Game);
     } catch (err) {
       console.error(err);
     }

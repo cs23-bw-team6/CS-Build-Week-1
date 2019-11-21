@@ -78,7 +78,9 @@ class Room(models.Model):
                 'n_to': self.n_to,
                 's_to': self.s_to,
                 'e_to': self.e_to,
-                'w_to': self.w_to}
+                'w_to': self.w_to,
+                'x': self.x,
+                'y': self.y}
 
     def connect_rooms(self, connecting_room, direction):
         """
