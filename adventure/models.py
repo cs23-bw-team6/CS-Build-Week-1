@@ -8,8 +8,8 @@ import uuid
 
 class Item(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
-    name = models.CharField(max_length=50, default="Item Name")
-    description = models.CharField(max_length=50, default='Item Description')
+    name = models.CharField(max_length=500, default="Item Name")
+    description = models.CharField(max_length=500, default='Item Description')
     is_light = models.BooleanField(default=False)
     weight = models.IntegerField(default=1)
     seen = models.BooleanField(default=False)
@@ -31,8 +31,8 @@ class Item(models.Model):
 
 class Container(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
-    name = models.CharField(max_length=50, default="Container Name")
-    description = models.CharField(max_length=50, default='Container Description')
+    name = models.CharField(max_length=500, default="Container Name")
+    description = models.CharField(max_length=500, default='Container Description')
     weight = models.IntegerField(default=50)
     seen = models.BooleanField(default=False)
     locked = models.BooleanField(default=True)
