@@ -1,0 +1,43 @@
+.Game__header {
+  align-items: center;
+  display: flex;
+  img {
+    width: 50px;
+    height: 50px;
+    margin: 1rem;
+  }
+}
+
+.Game__body {
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.Game__body-left {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+
+  .WorldMap {
+    background: blue;
+  }
+
+  .Commo {
+    background: honeydew;
+    height: 150px;
+  }
+}
+
+.Game__body-right {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20%;
+
+  .Inventory {
+    background: lightblue;
+  }
+}
