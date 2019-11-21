@@ -13,8 +13,8 @@ import random
 # Not complicated, only need to unpack small 2d arrays though
 def flatten_grid(grid):
     flat_list = []
-    for row in grid:
-        for room in row:
+    for row in grid.values():
+        for room in row.values():
             if room is not None:
                 flat_list.append(room.dictionary())
             else:
