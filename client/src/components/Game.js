@@ -24,7 +24,8 @@ const initializeUser = async token => {
 }
 
 const Game = (token) => {
-  const [user, setUser] = useState(initializeUser(token.token));
+  const token = token.token;
+  const [user, setUser] = useState(initializeUser(token));
   function logout() {
     window.localStorage.clear();
     window.location.reload();
@@ -44,7 +45,7 @@ const Game = (token) => {
       <main className="Game__body">
         <div className="WorldMap">WorldMap</div>
         <div className="Game__body__bottom">
-          <Map />
+          <Map token={token}/>
           <section className="Commo">
             <div className="Room">Room Description</div>
             <div className="Inventory">Inventory</div>
