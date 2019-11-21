@@ -39,7 +39,9 @@ def initialize(request):
     player_id = player.id
     uuid = player.uuid
     room = player.room()
+    player.score = 0
     players = room.player_names(player_id)
+    player.save()
     return JsonResponse(
         {'uuid': uuid,
          'name': player.user.username,
