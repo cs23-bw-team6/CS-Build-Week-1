@@ -1,0 +1,13 @@
+.WorldMap {
+  // border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.WorldMap__room {
+  background: saddlebrown;
+  &.active {
+    background: sienna;
+  }
+}
