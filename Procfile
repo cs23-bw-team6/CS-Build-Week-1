@@ -1,2 +1,2 @@
 release: ./release-tasks.sh
-web: ./web-tasks.sh
+web: gunicorn adv_project.wsgi:application --log-file -
