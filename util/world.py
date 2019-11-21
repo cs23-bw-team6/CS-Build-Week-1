@@ -33,7 +33,9 @@ class World:
         self.num_chests = num_chests
 
     def get_rooms(self):
-        return flatten_grid(self.grid)
+        flat_grid = flatten_grid(self.grid)
+        print(flat_grid)
+        return flat_grid
 
     def generate_rooms(self):
         # Initialize the grid
