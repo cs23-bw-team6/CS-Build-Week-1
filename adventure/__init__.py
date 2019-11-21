@@ -1,3 +1,1 @@
-import sys
-sys.path.append('../util')
-from world import World
+from util.world import World
