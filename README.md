@@ -105,6 +105,17 @@ These are implemented on the test server: `https://lambda-mud-test.herokuapp.com
   * Players in previous room receive a message: `<name> has walked north.`
   * Players in next room receive a message: `<name> has entered from the south.`
 
+### Rooms
+* Request:
+    * `curl -X GET localhost:8000/api/adv/rooms/`
+* Response:
+    * `{"rooms": {"1": {"title": "Drawing Room of the Ferocious Bandersnatch", "description": "DEFAULT DESCRIPTION", "items": {"1": {"name": "Key of the Menacing Halfling", "description": "Maybe it opens the Chest of the Menacing Halfling!", "is_light": false, "weight": 1, "seen": false}}, "containers": {}, "players": {}, "n_to": 2, "s_to": 4, "e_to": 5, "w_to": 3},...`
+
+### Spawn
+* Request: (Re-spawns players(all in the same) and items(all in different) in random rooms.)
+    * `curl -X GET localhost:8000/api/adv/spawn/`
+* Response:
+    * `"World": "re-spawned."`
 
 ### Get_item
 * Request: (Replace token string with logged in user's auth token)
