@@ -73,7 +73,8 @@ class Room(models.Model):
         return {'title': self.title,
                 'description': self.description,
                 'items': {item.id: item.dictionary() for item in Item.objects.filter(room=self.id)},
-                'containers': {container.id: container.dictionary() for container in Container.objects.filter(room=self.id)},
+                'containers': {container.id: container.dictionary()
+                               for container in Container.objects.filter(room=self.id)},
                 'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=self.id)},
                 'n_to': self.n_to,
                 's_to': self.s_to,
@@ -81,9 +82,7 @@ class Room(models.Model):
                 'w_to': self.w_to}
 
     def connect_rooms(self, connecting_room, direction):
-        """
-        Connect two rooms in the given n/s/e/w direction
-        """
+        """Connect two rooms in the given direction."""
         reverse_dirs = {"n": "s", "s": "n", "e": "w", "w": "e"}
         reverse_dir = reverse_dirs[direction]
         setattr(self, f"{direction}_to", connecting_room.id)
@@ -91,16 +90,12 @@ class Room(models.Model):
         self.save()
         connecting_room.save()
 
-    def get_room_in_direction(self, direction):
-        """
-        Connect two rooms in the given n/s/e/w direction
-        """
-        return getattr(self, f"{direction}_to")
-
     def player_names(self, current_player_id):
+        """List the names of other players in the current room."""
         return [p.user.username for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
     def player_UUIDs(self, current_player_id):
+        """List the uuid of other players in the room."""
         return [p.uuid for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
 
@@ -124,11 +119,13 @@ class Player(models.Model):
                 'uuid': self.uuid}
 
     def initialize(self):
+        """Set the current room to the first room's id."""
         if self.current_room == 0:
             self.current_room = Room.objects.first().id
             self.save()
 
     def room(self):
+        """Return the player's current Room object."""
         try:
             return Room.objects.get(id=self.current_room)
         except Room.DoesNotExist:

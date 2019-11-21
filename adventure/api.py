@@ -19,6 +19,7 @@ import json
 @csrf_exempt
 @api_view(["GET"])
 def spawn(request):
+    """Move all players to a random room and scatter keys and chests about dungeon."""
     seed_items(num_rooms=Room.objects.count(), num_chests=Container.objects.count())
     seed_players(num_rooms=Room.objects.count())
     return JsonResponse({"World": "re-spawned."})
@@ -27,6 +28,7 @@ def spawn(request):
 @csrf_exempt
 @api_view(["GET"])
 def rooms(request):
+    """Return dict of room ids and room dicts."""
     rooms_ = {room.id: room.dictionary() for room in Room.objects.all()}
     return JsonResponse({'rooms': rooms_})
 
@@ -34,6 +36,10 @@ def rooms(request):
 @csrf_exempt
 @api_view(["GET"])
 def initialize(request):
+    """Place an active user in the map.
+
+    Reset player score to 0.
+    """
     user = request.user
     player = user.player
     player_id = player.id
@@ -55,17 +61,26 @@ def initialize(request):
 @csrf_exempt
 @api_view(["POST"])
 def use_item(request):
+    """Use a key to open a chest.
+
+    Keys only work in the room the chest is in.
+    If the chest has the treasure, we have a winner.
+    """
     player = request.user.player
     data = json.loads(request.body)
     item = Item.objects.get(name=data['item'])
+
     # Make sure the player has this item.
     if item.player == player:
         chest = Container.objects.get(id=item.id)
+
         # Make sure the chest is in this room.
         if player.current_room == chest.room.id:
+
             # Check if there's an item. If so, we have our winner!
             if len(chest.item_set.all()) > 0:
                 player.score += 1
+
                 # Update high score if necessary.
                 if player.score > player.high_score:
                     player.high_score = player.score
@@ -84,24 +99,28 @@ def use_item(request):
                                  'score': player.score,
                                  'high_score': player.high_score,
                                  'msg': 'Keep searching for the treasure!'})
+
         return JsonResponse({"name": player.user.username,
                              'score': player.score,
                              'high_score': player.high_score,
                              'msg': 'The chest for this key is not in here!'})
+
     return JsonResponse({"error_msg": "You don't have that item."})
 
 
 @csrf_exempt
 @api_view(["POST"])
 def get_item(request):
+    """Pick up an item in the current room."""
     player = request.user.player
     data = json.loads(request.body)
     item = Item.objects.get(name=data['item'])
+    # Check that the item is in the player's current room.
     if item.room:
+        # Make sure the item isn't a chest.
         if item.is_key:
             item.room = None
             item.player = player
-            player.save()
             item.save()
             return JsonResponse({'name': player.user.username,
                                  'item': item.name,
@@ -116,6 +135,11 @@ def get_item(request):
 @csrf_exempt
 @api_view(["POST"])
 def move(request):
+    """Move the player in the given direction.
+
+    Return an error message if no passage exists in that direction.
+    Contains logic for Pusher messaging.
+    """
     dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
     reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
     player = request.user.player
