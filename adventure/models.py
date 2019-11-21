@@ -10,13 +10,18 @@ class Item(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
     name = models.CharField(max_length=50, default="Item Name")
     description = models.CharField(max_length=50, default='Item Description')
-    is_light = models.BooleanField(default=False)
-    weight = models.IntegerField(default=1)
-    seen = models.BooleanField(default=False)
-    is_key = models.BooleanField(default=False)
-    container = models.ForeignKey('Container', on_delete=models.CASCADE, blank=True, null=True)
-    room = models.ForeignKey('Room', on_delete=models.CASCADE, blank=True, null=True)
-    player = models.ForeignKey('Player', on_delete=models.CASCADE, blank=True, null=True)
+    container = models.ForeignKey('Container',
+                                  on_delete=models.CASCADE,
+                                  blank=True,
+                                  null=True)
+    room = models.ForeignKey('Room',
+                             on_delete=models.CASCADE,
+                             blank=True,
+                             null=True)
+    player = models.ForeignKey('Player',
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True)
 
     def __str__(self):
         return f"{self.name}\n{self.description}"
@@ -24,35 +29,31 @@ class Item(models.Model):
     def dictionary(self):
         return {'name': self.name,
                 'description': self.description,
-                'is_light': self.is_light,
-                'weight': self.weight,
-                'seen': self.seen}
+                'container': self.container_id,
+                'room': self.room_id,
+                'player': self.player_id}
 
 
 class Container(models.Model):
     # !!-- Be sure to add attributes to dictionary if adding here --!!
     name = models.CharField(max_length=50, default="Container Name")
     description = models.CharField(max_length=50, default='Container Description')
-    weight = models.IntegerField(default=50)
-    seen = models.BooleanField(default=False)
-    locked = models.BooleanField(default=True)
-    room = models.ForeignKey('Room', on_delete=models.CASCADE, blank=True, null=True)
+    room = models.ForeignKey('Room',
+                             on_delete=models.CASCADE,
+                             blank=True,
+                             null=True)
     key = models.OneToOneField('Item',
                                on_delete=models.CASCADE,
                                blank=True,
                                null=True,
-                               related_name='key_to',
-                               )
+                               related_name='key_to')
 
     def dictionary(self):
         return {'name': self.name,
                 'description': self.description,
-                'weight': self.weight,
-                'seen': self.seen,
-                'locked': self.locked,
-                'key': {key.id: key.name for key in Item.objects.filter(is_key=True) if key.id == self.id},
-                'items': {item.id: item.dictionary() for item in Item.objects.filter(container=self.id)}
-                }
+                'room': self.room_id,
+                'key': self.key_id,
+                'item': [item.id for item in Item.objects.filter(container=self.id)]}
 
 
 class Room(models.Model):
@@ -113,7 +114,7 @@ class Player(models.Model):
     def dictionary(self):
         return {'user': self.user.username,
                 'current_room': self.current_room,
-                'items': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
+                'items': [item.id for item in Item.objects.filter(player=self)],
                 'score': self.score,
                 'high_score': self.high_score,
                 'uuid': self.uuid}

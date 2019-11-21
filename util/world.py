@@ -1,6 +1,6 @@
-"""Create a game world of interconnected rooms to navigate.
-Scatter treasure chests and keys throughout the world.
-Place treasure in one chest as the goal of the game."""
+# """Create a game world of interconnected rooms to navigate.
+# Scatter treasure chests and keys throughout the world.
+# Place treasure in one chest as the goal of the game."""
 
 from adventure.models import Item, Container, Room, Player
 from .name_generation import make_name, adj_noun
@@ -11,12 +11,16 @@ import random
 class World:
     """Define a game world with rooms connected on a 2D grid.
 
-    :var width: The width of the grid.
-    :var height: The height of the grid.
+    Rooms are stored as their integer id, otherwise, grid members are None.
+
+    :var width: The width of the grid, in number of rooms.
+    :var height: The height of the grid, in number of rooms.
     :var num_rooms: The number of rooms to add.
     :var num_chests: The number of chests to hide.
+
     """
-    def __init__(self, width, height, num_rooms, num_chests):
+
+    def __init__(self, width: int, height: int, num_rooms: int, num_chests: int):
         self.width = width
         self.height = height
         self.num_rooms = num_rooms
@@ -67,8 +71,10 @@ class World:
                     if not self.grid[new_y][new_x]:
                         # Make a new room, save it, connect it to the current room,
                         # and add it into the queue so we can add more rooms to it.
-                        # TODO: Add room description.
-                        next_room = Room(title=make_name(), x=new_x, y=new_y)
+                        next_room = Room(title=make_name(),
+                                         # TODO: Add room description.
+                                         x=new_x,
+                                         y=new_y)
                         next_room.save()
                         self.grid[new_y][new_x] = next_room.id
                         current_room.connect_rooms(next_room, direction)
@@ -76,7 +82,7 @@ class World:
                         self.room_count += 1
 
     def print_rooms(self):
-        """Print the rooms in room_grid in ascii characters."""
+        """Print the rooms in self.grid in ascii characters."""
         # Add top border
         string = "# " * ((3 + self.width * 5) // 2) + "\n"
 
@@ -130,8 +136,7 @@ class World:
             chest_name = "Chest of the " + name
             k = Item(name=key_name,
                      description=f"Maybe it opens the {chest_name}?!",
-                     room=None,
-                     is_key=True)
+                     room=None)
             c = Container(name=chest_name,
                           description="Maybe there's treasure inside!",
                           key=k,
@@ -183,7 +188,8 @@ def main():
     w.generate_rooms()
     w.print_rooms()
     w.create_items()
-    seed_items(num_chests=num_chest, num_rooms=num_rooms)
+    seed_items(num_chests=num_chest,
+               num_rooms=num_rooms)
     seed_players(num_rooms=num_rooms)
 
     print('World Created!! Good Job!')

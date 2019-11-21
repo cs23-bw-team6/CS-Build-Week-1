@@ -22,7 +22,7 @@ def spawn(request):
     """Move all players to a random room and scatter keys and chests about dungeon."""
     seed_items(num_rooms=Room.objects.count(), num_chests=Container.objects.count())
     seed_players(num_rooms=Room.objects.count())
-    return JsonResponse({"World": "re-spawned."})
+    return JsonResponse({"World": "re-spawned."}, safe=True)
 
 
 @csrf_exempt
@@ -30,7 +30,7 @@ def spawn(request):
 def rooms(request):
     """Return dict of room ids and room dicts."""
     rooms_ = {room.id: room.dictionary() for room in Room.objects.all()}
-    return JsonResponse({'rooms': rooms_})
+    return JsonResponse({'rooms': rooms_}, safe=True)
 
 
 @csrf_exempt
@@ -46,7 +46,6 @@ def initialize(request):
     uuid = player.uuid
     room = player.room()
     player.score = 0
-    players = room.player_names(player_id)
     player.save()
     return JsonResponse(
         {'uuid': uuid,
@@ -55,7 +54,8 @@ def initialize(request):
          'description': room.description,
          'items': [item.name for item in room.item_set.all()],
          'containers': [container.name for container in room.container_set.all()],
-         'players': players}, safe=True)
+         'players': room.player_names(player_id)},
+        safe=True)
 
 
 @csrf_exempt
@@ -88,24 +88,28 @@ def use_item(request):
                     return JsonResponse({'name': player.user.username,
                                          'score': player.score,
                                          'high_score': player.high_score,
-                                         'msg': 'You won!!\nNew Personal High Score!!'})
+                                         'msg': 'You won!!\nNew Personal High Score!!'},
+                                        safe=True)
                 player.save()
                 return JsonResponse({'name': player.user.username,
                                      'score': player.score,
                                      'high_score': player.high_score,
-                                     'msg': 'You won!!'})
+                                     'msg': 'You won!!'},
+                                    safe=True)
 
             return JsonResponse({"name": player.user.username,
                                  'score': player.score,
                                  'high_score': player.high_score,
-                                 'msg': 'Keep searching for the treasure!'})
+                                 'msg': 'Keep searching for the treasure!'},
+                                safe=True)
 
         return JsonResponse({"name": player.user.username,
                              'score': player.score,
                              'high_score': player.high_score,
-                             'msg': 'The chest for this key is not in here!'})
+                             'msg': 'The chest for this key is not in here!'},
+                            safe=True)
 
-    return JsonResponse({"error_msg": "You don't have that item."})
+    return JsonResponse({"error_msg": "You don't have that item."}, safe=True)
 
 
 @csrf_exempt
@@ -127,9 +131,8 @@ def get_item(request):
                                  'description': item.description,
                                  'error_msg': "Error in get_item"},
                                 safe=True)
-        return JsonResponse({'error_msg': 'Chests are too heavy.'},
-                            safe=True)
-    return JsonResponse({'error_msg': "I don't see that here"})
+        return JsonResponse({'error_msg': 'Chests are too heavy.'}, safe=True)
+    return JsonResponse({'error_msg': "I don't see that here"}, safe=True)
 
 
 @csrf_exempt
@@ -140,14 +143,15 @@ def move(request):
     Return an error message if no passage exists in that direction.
     Contains logic for Pusher messaging.
     """
-    dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
-    reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
+    # dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
+    # reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
     player = request.user.player
-    player_id = player.id
-    player_uuid = player.uuid
+    # player_id = player.id
+    # player_uuid = player.uuid
     data = json.loads(request.body)
     direction = data['direction']
     room = player.room()
+
     next_room_id = None
     if direction == "n":
         next_room_id = room.n_to
@@ -157,12 +161,12 @@ def move(request):
         next_room_id = room.e_to
     elif direction == "w":
         next_room_id = room.w_to
-    if next_room_id and next_room_id > 0:
+    if next_room_id:
         next_room = Room.objects.get(id=next_room_id)
         player.current_room = next_room_id
         player.save()
 
-        # Below is all for the pusher stuff.
+        # Below is all pusher stuff.
 
         # current_player_uui_ds = room.player_UUIDs(player_id)
         # next_player_uui_ds = next_room.player_UUIDs(player_id)
@@ -179,7 +183,7 @@ def move(request):
              'description': next_room.description,
              'items': [item.name for item in next_room.item_set.all()],
              'containers': [container.name for container in next_room.container_set.all()],
-             'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=next_room_id)},
+             'players': next_room.player_names(player.id),
              'error_msg': ""},
             safe=True)
     else:
@@ -189,7 +193,7 @@ def move(request):
              'description': room.description,
              'items': [item.name for item in room.item_set.all()],
              'containers': [container.name for container in room.container_set.all()],
-             'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=room.id)},
+             'players': room.player_names(player.id),
              'error_msg': "You cannot move that way."},
             safe=True)
 
