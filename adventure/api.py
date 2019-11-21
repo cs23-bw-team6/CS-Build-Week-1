@@ -9,7 +9,7 @@ from .models import *
 from rest_framework.decorators import api_view
 import json
 
-seed_world()
+# seed_world()
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'),
