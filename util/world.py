@@ -3,7 +3,7 @@
 # Place treasure in one chest as the goal of the game."""
 
 from adventure.models import Item, Container, Room, Player
-from .name_generation import make_name, adj_noun
+from .name_generation import make_name, adj_noun, make_name_desc
 from collections import deque
 import random
 
@@ -40,7 +40,8 @@ class World:
         mid_x = (self.width // 2) - 1
 
         # Make the first room to add to our world. Place it in the center of the grid.
-        first = Room(title=make_name(), x=mid_x, y=mid_y)
+        name, desc = make_name_desc()
+        first = Room(title=name,description=desc, x=mid_x, y=mid_y)
         first.save()
         self.grid[first.y][first.x] = first.id
 
@@ -71,8 +72,9 @@ class World:
                     if not self.grid[new_y][new_x]:
                         # Make a new room, save it, connect it to the current room,
                         # and add it into the queue so we can add more rooms to it.
-                        next_room = Room(title=make_name(),
-                                         # TODO: Add room description.
+                        name, desc = make_name_desc()
+                        next_room = Room(title=name,
+                                         description=desc,
                                          x=new_x,
                                          y=new_y)
                         next_room.save()
