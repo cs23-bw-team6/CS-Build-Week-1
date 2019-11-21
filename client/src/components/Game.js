@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Map from './Map';
 import oldMap from '../assets/map.png';
 import Compass from './Compass';
 import axios from 'axios';
@@ -10,19 +11,20 @@ const initializeUser = async token => {
 	let user = {}
 	const postUrl = `${baseUrl}api/adv/initialize/`;
 	try{
-		user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`} });
+    user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`} });
+    console.log(user.data);
 	} catch(err) {
 		console.error(err);
 		localStorage.removeItem('token');
 		return null;
 	}
-	return user;
+	return user.data;
 
 
 }
 
 const Game = (token) => {
-  const [user, setUser] = useState(initializeUser)
+  const [user, setUser] = useState(initializeUser(token.token));
   function logout() {
     window.localStorage.clear();
     window.location.reload();
@@ -42,6 +44,7 @@ const Game = (token) => {
       <main className="Game__body">
         <div className="WorldMap">WorldMap</div>
         <div className="Game__body__bottom">
+          <Map />
           <section className="Commo">
             <div className="Room">Room Description</div>
             <div className="Inventory">Inventory</div>
