@@ -1,0 +1,62 @@
+.Login__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.Login__left-side {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    margin: 1rem;
+  }
+  img {
+    width: 80%;
+    max-width: 400px;
+  }
+}
+
+.Login__toggle {
+  display: flex;
+  p {
+    cursor: pointer;
+    padding: 1rem;
+    text-align: center;
+    width: 50%;
+    &:hover {
+      background: white;
+    }
+    &.active {
+      background: sienna;
+      color: white;
+    }
+  }
+}
+
+.Login__form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  button {
+    cursor: pointer;
+    padding: 1rem;
+    width: 50%;
+    &:hover {
+      background: beige;
+    }
+  }
+
+  label {
+    align-self: flex-start;
+  }
+  input {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    width: 80%;
+  }
+}
