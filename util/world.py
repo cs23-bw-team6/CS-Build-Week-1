@@ -162,7 +162,7 @@ def seed_world():
     w.print_rooms()
     w.create_items()
     seed_items(num_chests=num_chest, num_rooms=num_rooms)
-    seed_players(num_rooms=num_rooms)
+    # seed_players(num_rooms=num_rooms)
 
     print('World Created!! Good Job!')
     print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {w.room_count}\n")
