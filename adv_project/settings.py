@@ -63,11 +63,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsPostCsrfMiddleware'
+    'django.middleware.common.CommonMiddleware'
 ]
 
-# CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL=True
 
 ROOT_URLCONF = 'adv_project.urls'
 
@@ -137,22 +136,22 @@ REST_FRAMEWORK = {
 }
 
 
-# CORS_ALLOW_HEADERS = [
-#     'accept',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-#     'Access-Control-Allow-Origin',
-# ]
-
-CORS_ORIGIN_WHITELIST = [
-    'https://treasure-hunting-live.s3-us-west-2.amazonaws.com'
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Access-Control-Allow-Origin',
 ]
+
+# CORS_ORIGIN_WHITELIST = [
+#     'https://treasure-hunting-live.s3-us-west-2.amazonaws.com'
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
