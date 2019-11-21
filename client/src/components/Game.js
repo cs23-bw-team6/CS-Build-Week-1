@@ -8,14 +8,13 @@ import '../scss/Game.scss';
 const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
 
-
 const Game = (token) => {
   const [user, setUser] = useState('');
   const initializeUser = async token => {
     let user = {}
     const postUrl = `${baseUrl}api/adv/initialize/`;
     try {
-      user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`});
+      user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`, 'Access-Control-Allow-Origin': '*'} });
       setUser(user.data);
     } catch(err) {
       console.error(err);

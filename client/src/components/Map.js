@@ -10,7 +10,7 @@ const Map = () => {
     const download_rooms = async () => {
         const url = `${BASE_URL}api/adv/rooms/`;
         try {
-            const new_map = await axios.get(url);
+            const new_map = await axios.get(url, { 'headers': {'Access-Control-Allow-Origin': '*'}});
             setRooms(new_map.data.rooms);
         } catch(err) {
             return console.error(err);

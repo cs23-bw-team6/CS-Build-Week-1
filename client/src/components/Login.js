@@ -29,7 +29,7 @@ const Login = (token, setActiveComponent) => {
       ? formData
       : { username: formData.username, password: formData.password1 };
     try {
-      const res = await axios.post(postUrl, postData);
+      const res = await axios.post(postUrl, postData, { 'headers': {'Access-Control-Allow-Origin': '*'}});
       window.localStorage.setItem('token', res.data.key);
       setActiveComponent(Game);
     } catch (err) {
