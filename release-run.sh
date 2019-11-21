@@ -1,2 +1,3 @@
-python manage.py makemigrations
-python manage.py migrate
+./manage.py makemigrations
+./manage.py migrate
+./manage.py create_world.py
