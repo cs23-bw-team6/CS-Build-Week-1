@@ -40,7 +40,8 @@ class World:
         mid_x = (self.width // 2) - 1
 
         # Make the first room to add to our world. Place it in the center of the grid.
-        first = Room(title=make_name(), x=mid_x, y=mid_y)
+        n, d = make_name()
+        first = Room(title=n, description=d, x=mid_x, y=mid_y)
         first.save()
         self.grid[first.y][first.x] = first.id
 
@@ -71,7 +72,9 @@ class World:
                     if not self.grid[new_y][new_x]:
                         # Make a new room, save it, connect it to the current room,
                         # and add it into the queue so we can add more rooms to it.
-                        next_room = Room(title=make_name(),
+                        n, d = make_name()
+                        next_room = Room(title = n,
+                                        description = d, 
                                          # TODO: Add room description.
                                          x=new_x,
                                          y=new_y)
