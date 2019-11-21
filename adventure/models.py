@@ -109,6 +109,8 @@ class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_room = models.IntegerField(default=0)
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    score = models.IntegerField(default=0)
+    high_score = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_login}"
@@ -117,6 +119,8 @@ class Player(models.Model):
         return {'user': self.user.username,
                 'current_room': self.current_room,
                 'items': {item.id: item.dictionary() for item in Item.objects.filter(player=self)},
+                'score': self.score,
+                'high_score': self.high_score,
                 'uuid': self.uuid}
 
     def initialize(self):

@@ -56,19 +56,36 @@ def use_item(request):
     player = request.user.player
     data = json.loads(request.body)
     item = Item.objects.get(name=data['item'])
+    # Make sure the player has this item.
     if item.player == player:
-        chest_name = "Chest of the" + item.name[10:]
-        chest = Container.objects.get(name=chest_name)
+        chest = Container.objects.get(id=item.id)
+        # Make sure the chest is in this room.
+        if player.current_room == chest.room.id:
+            # Check if there's an item. If so, we have our winner!
+            if len(chest.item_set.all()) > 0:
+                player.score += 1
+                # Update high score if necessary.
+                if player.score > player.high_score:
+                    player.high_score = player.score
+                    player.save()
+                    return JsonResponse({'name': player.user.username,
+                                         'score': player.score,
+                                         'high_score': player.high_score,
+                                         'msg': 'You won!!\nNew Personal High Score!!'})
+                player.save()
+                return JsonResponse({'name': player.user.username,
+                                     'score': player.score,
+                                     'high_score': player.high_score,
+                                     'msg': 'You won!!'})
 
-        chest_item = chest.item_set.all()[0]
-        chest_item.locked = False
-        chest_item.player = player
-        chest_item.container = None
-        chest_item.save()
+            return JsonResponse({"name": player.user.username,
+                                 'score': player.score,
+                                 'high_score': player.high_score,
+                                 'msg': 'Keep searching for the treasure!'})
         return JsonResponse({"name": player.user.username,
-                             'item': chest_item.name,
-                             'description': chest_item.description,
-                             'error_msg': ""})
+                             'score': player.score,
+                             'high_score': player.high_score,
+                             'msg': 'The chest for this key is not in here!'})
     return JsonResponse({"error_msg": "You don't have that item."})
 
 
@@ -134,8 +151,8 @@ def move(request):
             {'name': player.user.username,
              'title': next_room.title,
              'description': next_room.description,
-             'items': [item.name for item in room.item_set.all()],
-             'containers': [container.name for container in room.container_set.all()],
+             'items': [item.name for item in next_room.item_set.all()],
+             'containers': [container.name for container in next_room.container_set.all()],
              'players': {player.id: player.dictionary() for player in Player.objects.filter(current_room=next_room_id)},
              'error_msg': ""},
             safe=True)
