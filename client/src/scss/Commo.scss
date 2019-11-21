@@ -1,0 +1,22 @@
+.Commo {
+  // border: 1px solid red;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.room-description {
+  border-bottom: 2px solid sienna;
+  border-top: 2px solid sienna;
+  background: white;
+  padding: 1rem 1rem 0 1rem;
+  margin-bottom: 1rem;
+  header {
+    margin-left: -1rem;
+  }
+}
+
+.room-items {
+  background: white;
+}

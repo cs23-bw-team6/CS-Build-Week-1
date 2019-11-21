@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
 
+import Commo from './Commo';
 import Compass from './Compass';
 import WorldMap from './WorldMap';
 
@@ -9,6 +10,7 @@ import '../scss/Game.scss';
 
 const Game = () => {
   const [rooms, setRooms] = useState(null);
+  const [player, setPlayer] = useState(null);
 
   function logout() {
     window.localStorage.clear();
@@ -33,9 +35,20 @@ const Game = () => {
     }
   }
 
+  async function fetchPlayerData() {
+    try {
+      const { data } = await axiosWithAuth().get('adv/init/');
+      // console.log('fetchplayerdata data', data);
+      setPlayer(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     if (!rooms) fetchRoomData();
-  }, [rooms]);
+    if (!player) fetchPlayerData();
+  }, [player, rooms]);
 
   console.log('WorldMap.js RENDER rooms', rooms);
 
@@ -53,11 +66,11 @@ const Game = () => {
       <main className="Game__body">
         <WorldMap rooms={rooms} />
         <div className="Game__body__bottom">
-          <section className="Commo">
-            <div className="Room">Room Description</div>
-            <div className="Inventory">Inventory</div>
-          </section>
-          <Compass fetchRoomData={fetchRoomData} />
+          <Commo player={player} />
+          <Compass
+            fetchRoomData={fetchRoomData}
+            fetchPlayerData={fetchPlayerData}
+          />
         </div>
       </main>
     </section>

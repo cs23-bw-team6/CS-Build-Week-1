@@ -13,14 +13,17 @@ import compass33 from '../assets/compass/compass33.png';
 
 import '../scss/Compass.scss';
 
-const Compass = ({ fetchRoomData }) => {
+const Compass = ({ fetchRoomData, fetchPlayerData }) => {
   async function handleClick(e) {
     const { data } = await axiosWithAuth().post('adv/api/move/', {
       direction: e.target.name
     });
-    console.log(data);
-    fetchRoomData();
+    if (data.error_msg === '') {
+      fetchRoomData();
+      fetchPlayerData();
+    } else console.error(data.error_msg);
   }
+
   return (
     <section className="Compass">
       <img src={compass11} alt="compass piece" />

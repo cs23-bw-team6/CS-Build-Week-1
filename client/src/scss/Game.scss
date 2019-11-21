@@ -13,41 +13,14 @@
 }
 
 .Game__body {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-
-  .WorldMap {
-    background: rgb(245, 245, 220);
-    background: linear-gradient(
-      180deg,
-      rgba(245, 245, 220, 1) 0%,
-      rgba(255, 255, 255, 1) 80%
-    );
-    height: 400px;
-  }
 }
 
 .Game__body__bottom {
-  align-items: center;
   display: flex;
   justify-content: space-between;
-
-  .Commo {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .Room {
-    border-bottom: 2px solid sienna;
-    background: white;
-    height: 150px;
-  }
-
-  .Inventory {
-    background: white;
-  }
 }

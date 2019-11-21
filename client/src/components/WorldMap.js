@@ -17,7 +17,11 @@ const WorldMap = ({ rooms }) => {
               key={`${room.x}${room.y}`}
               style={{
                 gridColumn: room.x + 1,
-                gridRow: room.y + 1
+                gridRow: room.y + 1,
+                borderTop: `${room.n_to ? '0' : '4'}px solid beige`,
+                borderRight: `${room.w_to ? '0' : '4'}px solid beige`,
+                borderBottom: `${room.s_to ? '0' : '4'}px solid beige`,
+                borderLeft: `${room.e_to ? '0' : '4'}px solid beige`
               }}
             >
               {room.id}
