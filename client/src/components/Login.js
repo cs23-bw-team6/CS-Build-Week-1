@@ -33,6 +33,7 @@ const Login = () => {
     try {
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
