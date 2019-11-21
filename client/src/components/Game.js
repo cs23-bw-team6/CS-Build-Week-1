@@ -12,14 +12,14 @@ const Game = () => {
       </header>
 
       <main className="Game__body">
-        <section className="Game__body-left">
-          <div className="WorldMap">WorldMap</div>
-          <div className="Commo">Commo</div>
-        </section>
-        <section className="Game__body-right">
-          <div className="Inventory">Inventory</div>
+        <div className="WorldMap">WorldMap</div>
+        <div className="Game__body__bottom">
+          <section className="Commo">
+            <div className="Room">Room Description</div>
+            <div className="Inventory">Inventory</div>
+          </section>
           <Compass />
-        </section>
+        </div>
       </main>
     </section>
   );
