@@ -1,4 +1,6 @@
 import React from 'react';
+import { axiosWithAuth } from '../axiosWithAuth';
+
 import compass11 from '../assets/compass/compass11.png';
 import compass12 from '../assets/compass/compass12.png';
 import compass13 from '../assets/compass/compass13.png';
@@ -8,9 +10,17 @@ import compass23 from '../assets/compass/compass23.png';
 import compass31 from '../assets/compass/compass31.png';
 import compass32 from '../assets/compass/compass32.png';
 import compass33 from '../assets/compass/compass33.png';
+
 import '../scss/Compass.scss';
 
-const Compass = () => {
+const Compass = ({ fetchRoomData }) => {
+  async function handleClick(e) {
+    const { data } = await axiosWithAuth().post('adv/api/move/', {
+      direction: e.target.name
+    });
+    console.log(data);
+    fetchRoomData();
+  }
   return (
     <section className="Compass">
       <img src={compass11} alt="compass piece" />
@@ -18,6 +28,7 @@ const Compass = () => {
         alt="NORTH compass piece"
         className="clickable"
         name="n"
+        onClick={handleClick}
         src={compass12}
       />
       <img src={compass13} alt="compass piece" />
@@ -25,6 +36,7 @@ const Compass = () => {
         alt="WEST compass piece"
         className="clickable"
         name="w"
+        onClick={handleClick}
         src={compass21}
       />
       <img src={compass22} alt="compass piece" />
@@ -32,6 +44,7 @@ const Compass = () => {
         alt="EAST compass piece"
         className="clickable"
         name="e"
+        onClick={handleClick}
         src={compass23}
       />
       <img src={compass31} alt="compass piece" />
@@ -39,6 +52,7 @@ const Compass = () => {
         alt="SOUTH compass piece"
         className="clickable"
         name="s"
+        onClick={handleClick}
         src={compass32}
       />
       <img src={compass33} alt="compass piece" />
