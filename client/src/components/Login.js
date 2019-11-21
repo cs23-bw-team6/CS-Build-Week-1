@@ -10,7 +10,8 @@ const Login = () => {
 
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password1: '',
+    password2: ''
   });
 
   const handleChange = e => {
@@ -24,16 +25,11 @@ const Login = () => {
     e.preventDefault();
     const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     const postData = newUser
-      ? {
-          username: formData.username,
-          password1: formData.password,
-          password2: formData.password
-        }
-      : { username: formData.username, password: formData.password };
+      ? formData
+      : { username: formData.username, password: formData.password1 };
     try {
-      console.log(postUrl);
-      console.log(postData);
       const res = await axios.post(postUrl, postData);
+      console.log(res);
       window.localStorage.setItem('token', res.data.key);
       window.location.reload();
     } catch (err) {
@@ -74,13 +70,23 @@ const Login = () => {
 
           <label htmlFor="password">Password</label>
           <input
-            id="password"
-            name="password"
+            id="password1"
+            name="password1"
             type="text"
             onChange={handleChange}
           />
 
-          {newUser ? <button>Register</button> : <button>Login</button>}
+          {newUser ? (
+					<>
+						<label htmlFor="password2">Enter password again to verify</label>
+						<input
+							id="password2"
+							name="password2"
+							type="text"
+							onChange={handleChange}
+            />
+            <button>Register</button>
+          </>) : (<button>Login</button>)}
         </form>
       </section>
     </div>
