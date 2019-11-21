@@ -150,9 +150,9 @@ REST_FRAMEWORK = {
 #     'Access-Control-Allow-Origin',
 # ]
 
-# CORS_ORIGIN_WHITELIST = [
-#     'https://treasure-hunting-cs23.herokuapp.com'
-# ]
+CORS_ORIGIN_WHITELIST = [
+    'https://treasure-hunting-live.s3-us-west-2.amazonaws.com'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
