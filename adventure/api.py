@@ -155,9 +155,9 @@ def move(request):
         next_room_id = room.n_to
     elif direction == "s":
         next_room_id = room.s_to
-    elif direction == "e":
-        next_room_id = room.e_to
     elif direction == "w":
+        next_room_id = room.e_to
+    elif direction == "e":
         next_room_id = room.w_to
     if next_room_id:
         next_room = Room.objects.get(id=next_room_id)
