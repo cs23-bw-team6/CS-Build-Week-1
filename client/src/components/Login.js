@@ -3,6 +3,9 @@ import axios from 'axios';
 import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 const Login = () => {
   const baseUrl = process.env.REACT_APP_BACKEND;
 
