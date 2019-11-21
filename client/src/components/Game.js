@@ -15,7 +15,7 @@ const Game = (token) => {
     let user = {}
     const postUrl = `${baseUrl}api/adv/initialize/`;
     try {
-      user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`} });
+      user = await axios.get(postUrl, { headers: {'Authorization': `Token ${token}`, 'Access-Control-Allow-Origin': '*'} });
       setUser(user.data)
     } catch(err) {
       console.error(err);
