@@ -6,7 +6,7 @@ export const axiosWithAuth = () => {
   return axios.create({
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${token}`
+      'Authorization': `Token ${token}`
     },
     baseURL: `${process.env.REACT_APP_BACKEND}`
   });
