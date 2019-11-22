@@ -14,9 +14,11 @@ import compass33 from '../assets/compass/compass33.png';
 
 import '../scss/Compass.scss';
 
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
+
 const Compass = ({ fetchRoomData, fetchPlayerData }) => {
   async function handleClick(e) {
-    const { data } = await axiosWithAuth().post('adv/api/move/', {
+    const { data } = await axiosWithAuth().post(`${baseUrl}api/adv/move/`, {
       direction: e.target.name
     });
     if (data.error_msg === '') {
