@@ -1,5 +1,6 @@
 import React from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
+import regeneratorRuntime from "regenerator-runtime";
 
 import compass11 from '../assets/compass/compass11.png';
 import compass12 from '../assets/compass/compass12.png';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
+import regeneratorRuntime from "regenerator-runtime";
 
 import Commo from './Commo';
 import Compass from './Compass';

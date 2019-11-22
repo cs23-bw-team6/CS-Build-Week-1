@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
+import regeneratorRuntime from "regenerator-runtime";
 
 const Login = () => {
   const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
