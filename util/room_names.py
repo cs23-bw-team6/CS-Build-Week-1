@@ -74,9 +74,7 @@ name_desc = [('Nursery of the Wicked Elf',
  ('Sitting Room of the Treacherous Elf',
   'This is the Sitting Room of the Treacherous Elf, it is named as such because of the presence of a bed.\n\nThe '
   'Treacherous Elf is a monster that appears in the first chapter and a boss in the second chapter.\n\nIt was one of '
-  'the three bosses in The Lost Cave of the Lost Tribe. It was also one of the three bosses in The Lost Cave of the '
-  'Lost Tribe. It was also one of the three bosses in The Lost Cave of the Lost Tribe. It was also one of the three '
-  'bosses in The Lost Cave of the Lost Tribe.'),
+  'the three bosses in The Lost Cave of the Lost Tribe.'),
  ('Storeroom of the Brutal Kobold',
   "This is the Storeroom of the Brutal Kobold, it is named as such because of the way it looks. The room is full of "
   "Kobold weapons as seen below.\n\nThe room itself is full of Kobold weapons, it is not possible to get away from "
