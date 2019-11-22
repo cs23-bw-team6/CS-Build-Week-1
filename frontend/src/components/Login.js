@@ -4,7 +4,7 @@ import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
 import regeneratorRuntime from "regenerator-runtime";
 
-const Login = () => {
+const Login = (setToken) => {
   const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
   const [newUser, setNewUser] = useState(true);
@@ -34,7 +34,7 @@ const Login = () => {
     try {
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
-      // window.location.reload();
+      setToken(res.data.key);
     } catch (err) {
       console.error(err);
     }
