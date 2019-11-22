@@ -141,6 +141,7 @@ def move(request):
     Return an error message if no passage exists in that direction.
     Contains logic for Pusher messaging.
     """
+    print(request.Player)
     # dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
     # reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
     player = request.user.player
