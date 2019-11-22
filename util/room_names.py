@@ -196,7 +196,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'also a place that holds many secrets, including how to summon and control the mighty treant spirits. This is a '
   'place that needs a good keeper.\n\nLocation\n\nThis area is located north of the Great Swamp and north of the '
   'Great Swamp.\n\nCombat\n\nWhen fighting these enemies, it is recommended for you to have at least some level of '
-  'dexterity before engaging them. The enemies are weak to fire, so the fire arrows you.'),
+  'dexterity before engaging them. The enemies are weak to fire, so the fire arrows work.'),
  ('Antechamber of the Wicked Satyr',
   "This is the Antechamber of the Wicked Satyr, it is named as such because of its presence in the Antechamber of "
   "Satan, the Holy Mountain.\n\nIt is the abode of Evil Spirits and is said to be a place where they are kept in "
@@ -247,8 +247,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'every taste and preference.'),
  ('Ballroom of the Ruthless Ent',
   "This is the Ballroom of the Ruthless Ent, it is named as such because of the large amount of Ballroom Dancers of "
-  "the world.\n\nIt is known as Ruthless Ent Ballroom because of the large amount of Ballroom Dancers of the "
-  "world.\n\nThe Ruthless Ent is where the majority of the Ballroom Dancers reside and practice.\n\nIt is also where "
+  "the world.\n\nThe Ruthless Ent is where the majority of the Ballroom Dancers reside and practice.\n\nIt is also where "
   "the Ruthless Ent is known to practice their skills.\n\nIt is known as Ballroom Dancers' Ballroom because the "
   "majority of the Ballroom Dancers of the world reside."),
  ('Sitting Room of the Hapless Sphinx',
@@ -291,7 +290,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'This is the Bathroom of the Frozen Gremlin, it is named as such because of the fact that it seems to be the only '
   'toilet in the entire game that is not the bathroom in which the player first sleeps. In this game it acts as the '
   'first location in which the player is introduced to the story of the Gremlin and its relationship to the Bathroom '
-  'of the Frozen Gremlin.\n\nContents show]\n\nHistory Edit\n\nThe Bathroom of the Frozen Gremlin was a toilet in the '
+  'of the Frozen Gremlin.\n\nHistory Edit\n\nThe Bathroom of the Frozen Gremlin was a toilet in the '
   'bathhouse of a poor but still wealthy family in the town of Lle.'),
  ('Drawing Room of the Traiterous Orc',
   'This is the Drawing Room of the Traiterous Orc, it is named as such because of the traiterous orcs who use it as '
@@ -464,7 +463,7 @@ name_desc = [('Nursery of the Wicked Elf',
   "This is the Armory of the Impostor Troll, it is named as such because of the very large, round holes that are made "
   "in it. This is the original, as the one on the side of the Troll was not used after its first use.\n\nThis is the "
   "first item that is sold as part of the Troll Collection and is the first item that is sold by the seller as a "
-  "Troll.\n\nThis is a replica of the Troll Impostor Troll.<|endoftext|>In this article I'll be talking about the use "
+  "Troll.\n\nThis is a replica of the Troll Impostor Troll.\n\nIn this article I'll be talking about the use "
   "of the Naughty & Nice button."),
  ('Dressing Room of the Frozen Elf',
   'This is the Dressing Room of the Frozen Elf, it is named as such because of the dress that they have in '
@@ -480,7 +479,7 @@ name_desc = [('Nursery of the Wicked Elf',
  ('Rec-room of the Menacing Mermaid',
   'This is the Rec-room of the Menacing Mermaid, it is named as such because of the many mermaids that have been seen '
   'around here, and because they are quite a bit of trouble to deal with. They have a special ability to turn '
-  'invisible, making it almost impossible to catch them.\n\nContents show]\n\nRec-rooms Edit\n\nThe Rec-room of the '
+  'invisible, making it almost impossible to catch them.\n\nRec-rooms Edit\n\nThe Rec-room of the '
   'Mermen is the most feared of all of them, and it is the only one in the whole of the Great North Woods. It is also '
   'home to the largest number of mermen.'),
  ('Ballroom of the Hapless Phoenix',
@@ -491,7 +490,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'hotel where guests and staff alike have been known to die due to an accident.'),
  ('Game Room of the Perilous Orc',
   'This is the Game Room of the Perilous Orc, it is named as such because of the way the room appears, with the door '
-  'being a solid black and the floor and walls being black as well.\n\n\nThe entrance to the room is guarded by a '
+  'being a solid black and the floor and walls being black as well.\n\nThe entrance to the room is guarded by a '
   'very large, and terrifying, orc. I cannot believe I even have to type this; the room is extremely creepy. Even '
   'though the door is a solid black, the walls and ceiling are a very dark, dark gray. The only light is from a '
   'lantern that hangs on the wall, so you have to look carefully.'),
@@ -527,7 +526,7 @@ name_desc = [('Nursery of the Wicked Elf',
   "reside in or in the depths of."),
  ('Bathroom of the Wicked Halfling',
   "This is the Bathroom of the Wicked Halfling, it is named as such because of the shape of the bathtub, which is a "
-  "halfling's home.\n\n\nThe name of this bathhouse is a tribute to the original creator of these houses. He is named "
+  "halfling's home.\n\nThe name of this bathhouse is a tribute to the original creator of these houses. He is named "
   "as such because, when he built his house, he wanted it to match his personality to it's original shape. The "
   "Bathroom of the Wicked Halfling is the only bathhouse left by his design.\n\nThere are two bathrooms in the house. "
   "They each have a mirror, and the one in the center."),
@@ -563,8 +562,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'This is the Bedroom of the Savage Gnome, it is named as such because of the bed, it\'s size, and the way that it '
   'rests on the floor of the room, as it is in the "Bedroom of the Savage Gnome".\n\nThe Savage Gnome will attack '
   'enemies that enter the room. He also has a tendency to attack on sight, but has been stated to have a very low '
-  'amount of aggression.\n\nThis section contains bugs related to Savage Gnome. Before adding a bug to this list, '
-  'consider the following: Please reload an old save.'),
+  'amount of aggression.'),
  ('Nursery of the Brutal Tombs',
   "This is the Nursery of the Brutal Tombs, it is named as such because of how much of what is there, is so brutal. "
   "This is the place you can imagine being in prison and the place where the bad guys would go to get the best deals. "
@@ -596,11 +594,8 @@ name_desc = [('Nursery of the Wicked Elf',
   "killed off. It's also worth mentioning that it does not have to be killed because it is not an enemy. It could be "
   "a friendly creature, so to speak."),
  ('Library of the Precarious Phoenix',
-  'This is the Library of the Precarious Phoenix, it is named as such because of its appearance.[3]\n\nThis is the '
-  'Library of the Precarious Phoenix, it is named as such because of its appearance.\n\n\nThe Library of the '
-  'Precarious Phoenix\n\nThis is the Library of the Precarious Phoenix. It is the library of every Phoenix, '
-  'it is a place where all knowledge and knowledge that can be learned is kept and the knowledge itself is kept '
-  'safe.[4]\n\nThis is the Library of the Precarious Phoenix.'),
+  'This is the Library of the Precarious Phoenix, it is a place where all knowledge that can be learned '
+  'is kept and the knowledge itself is kept safe.'),
  ('Rec-room of the Malignant Elf',
   'This is the Rec-room of the Malignant Elf, it is named as such because of his malignant nature.\n\nThe Malignant '
   'Elf is a humanoid creature with dark hair, pale skin, and sharp features. It is a very tall being, standing at '
@@ -615,7 +610,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'broken, but it is a very powerful creature.'),
  ('Rec-room of the Traiterous Gremlin',
   "This is the Rec-room of the Traiterous Gremlin, it is named as such because of how it's shaped in the center. It "
-  "has a long tail, and a small head. As a result, the Rec-room is quite sensitive and sensitive to a certain extent. "
+  "has a long tail, and a small head. As a result, the Rec-room is quite sensitive to a certain extent. "
   "It is able to detect the slightest vibrations. It can be found in the forest in the northwest part of the Kingdom. "
   "The Rec-room will only appear if you approach it. If you get too close, you will feel pain and will go "
   "blind.\n\nThe Rec-room's attacks are based on the sound vibrations it makes."),
@@ -679,7 +674,7 @@ name_desc = [('Nursery of the Wicked Elf',
  ('Great Hall of the Frozen Army',
   'This is the Great Hall of the Frozen Army, it is named as such because of the fact that it is home to the Frozen '
   'Army. This is the place where the Frozen Army is located and it is the only place where they can be found during '
-  'the course of the story.\n\nContents show]\n\nDescription\n\nThis area is a large, wide hall, and is located deep '
+  'the course of the story.\n\nDescription\n\nThis area is a large, wide hall, and is located deep '
   'within the snowy mountains. It looks like it would take a very long time to travel there, and even the most '
   'skilled of soldiers would find themselves outmatched if they tried.'),
  ('Sitting Room of the Wicked Gremlin',
@@ -698,9 +693,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'This is the Office of the Duplicitous Satyr, it is named as such because of the fact that it is made up of '
   'multiple personalities with multiple personalities and is able to change the face of the character. It can also '
   'alter its appearance and body in a fashion similar to the shape of a face. It is an evil creature that is able to '
-  'manipulate its fellow creatures to its cause by causing them to feel fear or even fear itself.<|endoftext|>It is '
-  'important to note that there is no way to determine the actual number of patients who will receive the new drug. '
-  'In response to a query.'),
+  'manipulate its fellow creatures to its cause by causing them to feel fear or even fear itself.'),
  ('Storeroom of the Savage Gnome',
   'This is the Storeroom of the Savage Gnome, it is named as such because of the fact that it is in the bottom of the '
   '"storeroom" on the ground floor of the inn. It is a place where a Gnome would store his most prized items: his '
@@ -735,8 +728,8 @@ name_desc = [('Nursery of the Wicked Elf',
   'This is the Kitchen of the Impostor Army, it is named as such because of its design and appearance, and a large '
   'amount of its power is reserved for cooking. It may not be much different from an imitation of the real deal, '
   'but it doesn\'t have to be, because a lot of things are just as bad. A lot of things are bad, and the food is '
-  'probably a prime example of the food that is not bad.\n\n\n"I can\'t believe these guys actually have any self '
-  'worth."\n\n\nIf you want to eat some tasty food, you need to eat.'),
+  'probably a prime example of the food that is not bad.\n\n"I can\'t believe these guys actually have any self '
+  'worth."\n\nIf you want to eat some tasty food, you need to eat.'),
  ('Game Room of the Hapless Orc',
   'This is the Game Room of the Hapless Orc, it is named as such because of the amount of time it takes the players '
   'to reach the second level from the first. It is a small room with only one door, which leads out to a small room '
@@ -746,11 +739,10 @@ name_desc = [('Nursery of the Wicked Elf',
  ('Kitchen of the Perfidious Mermaid',
   'This is the Kitchen of the Perfidious Mermaid, it is named as such because of the presence of a large and '
   'elaborate, two-ton lobster, which has been known to be spotted by visitors throughout the world for the past few '
-  'years.\n\nThe Kitchen of the Perfidious Mermaid, in the Bay of Bengal, India\n\nPhoto credit:\n\nThe Kitchen of the'
-  ' Perfidious Mermaid, in the Bay of Bengal, India\n\nPhoto credit: Stephen Sinclair.'),
+  'years.\n\nThe Kitchen of the Perfidious Mermaid, in the Bay of Bengal, India\n\nPhoto credit: Stephen Sinclair.'),
  ('Antechamber of the Hapless Dragonborn',
   'This is the Antechamber of the Hapless Dragonborn, it is named as such because of its unique appearance of red and '
-  'gold, and the fact it can be accessed with the "Enter the Hapless Dragonborn" shout.\n\nContents show]\n\nLocation '
+  'gold, and the fact it can be accessed with the "Enter the Hapless Dragonborn" shout.\n\nLocation '
   'Edit\n\nThis location is located in the Dragonborn\'s starting area.\n\nIn order to enter, you must have killed '
   'the Dragonborn (and thus the Dragonborn\'s parent), and have then taken a few steps inside the Dragonborn\'s room '
   '(see screenshot). Once inside, you will be attacked by a group.'),
@@ -770,8 +762,7 @@ name_desc = [('Nursery of the Wicked Elf',
   "This is the Storeroom of the Duplicitous Sphinx, it is named as such because of how many different ways of looking "
   "at it it has! The original design had a large opening at one end, which was then covered with a door which opened "
   "into the storeroom. In its current incarnation, there is a small, circular opening at the front of the storeroom "
-  "which is covered by a door which opens into a large, open space.\n\nA note on the Sphinx's name:\n\nSince I'm a "
-  "little obsessed with the Sphinx"),
+  "which is covered by a door which opens into a large, open space."),
  ('Kitchen of the Precarious Halfling',
   "This is the Kitchen of the Precarious Halfling, it is named as such because of it's small size. The Kitchen is a "
   "common source of food as it provides food for other Halflings to eat.\n\nThe main food in the Kitchen is meat and "
@@ -830,9 +821,8 @@ name_desc = [('Nursery of the Wicked Elf',
  ('Ballroom of the Frozen Treant',
   "This is the Ballroom of the Frozen Treant, it is named as such because of its large size.\n\nIn Generations II-V, "
   "the player can use the Treant's Ability to turn the Treant into a Treantling. This allows the player to defeat the "
-  "Treantlings in their first encounter.\n\nIn the anime\n\nThe Treant in the anime\n\nIn the main series\n\nMajor "
-  "appearances\n\nTwo Treants appear in Jirachi: Wish Maker, first appearing as residents of the Pokémon Academy and "
-  "later as residents of the Treant."),
+  "Treantlings in their first encounter.\n\nTwo Treants appear in Jirachi: Wish Maker, first appearing as residents "
+  "of the Pokémon Academy and later as residents of the Treant."),
  ('Mud Room of the Malignant Treant',
   "This is the Mud Room of the Malignant Treant, it is named as such because of how it is the only way to get a Mud "
   "Ball from that part of the tree (unless you are an evil, greedy soul, then you'll get it from the Mud Room of the "
@@ -852,8 +842,8 @@ name_desc = [('Nursery of the Wicked Elf',
   "2\n\nThe Dwarven Mines Level 2 is the dungeon level after you have completed the Level 1-3.\n\nThis is the most "
   "challenging and fun way."),
  ('Great Hall of the Brutal Ent',
-  'This is the Great Hall of the Brutal Ent, it is named as such because of its brutal appearance.\n\nIn the '
-  'anime\n\nIn the main series\n\nThe Great Hall of the Brutal Ent was home to Team Rocket, which first appeared in '
+  'This is the Great Hall of the Brutal Ent, it is named as such because of its brutal appearance.\n\nThe Great Hall '
+  'of the Brutal Ent was home to Team Rocket, which first appeared in '
   'In the Shadows of an Invincible Enemy! along with a small group of other villains. While the main group went on '
   'their own adventures, the other members and other villains stayed behind to do a job.\n\nAsh caught up to them, '
   'as a group of Team Rocket had just stolen the Red Chain from the Great Hall.'),
@@ -999,16 +989,10 @@ name_desc = [('Nursery of the Wicked Elf',
   "it."),
  ('Nursery of the Savage Gremlin',
   "This is the Nursery of the Savage Gremlin, it is named as such because of the many different kinds of gremlins "
-  "that have appeared here.\n\nContents show]\n\nOverview Edit\n\nThis garden contains a few trees and a very large "
+  "that have appeared here.\n\nThis garden contains a few trees and a very large "
   "fountain. All the plants in the center of the garden can be collected to make green tea and drink it in order to "
   "revive yourself. There are also many plants that can't be found elsewhere, such as the blue flower for which there "
   "are only two flowers in the game, the red flower for which there is a purple flower in one place."),
- ('Game Room of the Duplicitous Mermaid',
-  "This is the Game Room of the Duplicitous Mermaid, it is named as such because of the similarities on the wall and "
-  "the walls.\n\nIt's probably one of the most confusing rooms for me, but I think I do a good job at it.\n\n(Note: "
-  "I'm not a huge fan of the floor and wall graphics, and for that reason I prefer making walls from the bottom up "
-  "like I did here)\n\nI've been meaning to get this room done for a few weeks now. It was the first room I really "
-  "wanted to make from a single texture."),
  ('Cave of the Impostor Halfling',
   "This is the Cave of the Impostor Halfling, it is named as such because of how its skin looks like that of one "
   "halfling. It appears on the second floor in a cave near the center of the maze. It looks very similar to a "
@@ -1086,7 +1070,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'dwarf-specific decorations. The table is a common sight throughout the fortress, as it has multiple food items, '
   'drinks, potions, and weapons. It is an extremely common item and will be found in most any room or area. It is '
   'also one of the most valuable items to get in a dwarf fortress, as it is worth more than most other '
-  'items.\n\nedit] Other Uses\n\nThis table is a favorite of the nobles, and has been used for many thins.'),
+  'items.\\n\nThis table is a favorite of the nobles, and has been used for many things.'),
  ('Den of the Precarious Gnome',
   'This is the Den of the Precarious Gnome, it is named as such because of the tiny, but extremely resilient, '
   'gnome that resides inside it, the one that makes it a den after all, and also because it is the only one to do so. '
@@ -1100,8 +1084,8 @@ name_desc = [('Nursery of the Wicked Elf',
   "Queen of the Trees can see them. The trees were once part of the Sea of Trees. When the Sea of Trees fell apart "
   "many of the trees were left behind."),
  ('Great Hall of the Treacherous Treant',
-  'This is the Great Hall of the Treacherous Treant, it is named as such because of its appearance.[4]\n\nTreacherous '
-  'Treant [ edit ]\n\nThe Treacherous Treant is a large, tall treant.\n\nThe Treacherous Treant stands tall, '
+  'This is the Great Hall of the Treacherous Treant, it is named as such because of its appearance.\n\nThe '
+  'Treacherous Treant is a large, tall treant.\n\nThe Treacherous Treant stands tall, '
   'like a tree with branches in each section. This gives it a feeling of height, and it is very intimidating.\n\nThe '
   'Treacherous Treant has an unusually sharp and long horn. In addition, it has several fangs on its front that are '
   'pointed down.'),
@@ -1164,7 +1148,7 @@ name_desc = [('Nursery of the Wicked Elf',
   'This is the Sitting Room of the Treacherous Tombs, it is named as such because of the way it is shaped - it is '
   'shaped like a throne. The throne itself is made of stone and has a black stone base. This is the only room where '
   'the Dark Tower series has taken place, which has been one of the most interesting themes in the '
-  'series.\n\nContents show]\n\nDescription Edit\n\nThis is also the location where the events of The Dark Tower take '
+  'series.\n\nEdit\n\nThis is also the location where the events of The Dark Tower take '
   'place. It features two large towers that rise over the river and are built over many graves.'),
  ('Armory of the Impostor Elf',
   'This is the Armory of the Impostor Elf, it is named as such because of the many different ways that an elf can be '
