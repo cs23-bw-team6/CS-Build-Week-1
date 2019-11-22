@@ -11,6 +11,7 @@ import '../scss/Game.scss';
 const Game = () => {
   const [rooms, setRooms] = useState(null);
   const [player, setPlayer] = useState(null);
+  const [holding, pickup] = useState([]);
 
   function logout() {
     window.localStorage.clear();
@@ -50,8 +51,6 @@ const Game = () => {
     if (!player) fetchPlayerData();
   }, [player, rooms]);
 
-  console.log('WorldMap.js RENDER rooms', rooms);
-
   return (
     <section className="Game">
       <header className="Game__header">
@@ -66,7 +65,12 @@ const Game = () => {
       <main className="Game__body">
         <WorldMap rooms={rooms} />
         <div className="Game__body__bottom">
-          <Commo player={player} />
+          <Commo
+            player={player}
+            fetchPlayerData={fetchPlayerData}
+            holding={holding}
+            pickup={pickup}
+          />
           <Compass
             fetchRoomData={fetchRoomData}
             fetchPlayerData={fetchPlayerData}

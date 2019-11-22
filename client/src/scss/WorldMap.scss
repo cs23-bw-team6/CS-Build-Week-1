@@ -1,5 +1,4 @@
 .WorldMap {
-  // border: 1px solid red;
   background: rgb(245, 245, 220);
   background: linear-gradient(
     180deg,
@@ -7,15 +6,17 @@
     rgba(255, 255, 255, 1) 80%
   );
   display: grid;
-  grid-template-columns: repeat(5, 4rem);
-  grid-template-rows: repeat(5, 4rem);
+  grid-template-columns: repeat(12, 2rem);
+  grid-template-rows: repeat(12, 2rem);
 }
 
 .WorldMap__room {
-  border-radius: 10px;
-  background: saddlebrown;
-  display: flex;
   align-items: center;
+  background: saddlebrown;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  font-size: 0.5rem;
   justify-content: center;
   &.active {
     opacity: 0.5;

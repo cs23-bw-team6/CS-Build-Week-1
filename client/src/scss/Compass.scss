@@ -3,9 +3,11 @@
   grid-template-columns: 4rem 4rem 4rem;
   grid-template-rows: 4rem 4rem 4rem;
   padding: 1rem;
+
   img {
-    width: 4rem;
     opacity: 1;
+    width: 4rem;
+
     &.clickable {
       cursor: pointer;
       &:hover {

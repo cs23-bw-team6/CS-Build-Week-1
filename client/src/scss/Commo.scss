@@ -1,22 +1,37 @@
 .Commo {
   // border: 1px solid red;
-  justify-content: space-between;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
 }
 
 .room-description {
   border-bottom: 2px solid sienna;
   border-top: 2px solid sienna;
-  background: white;
+  margin: 1rem 0;
   padding: 1rem 1rem 0 1rem;
-  margin-bottom: 1rem;
   header {
     margin-left: -1rem;
   }
 }
 
-.room-items {
-  background: white;
+.room-items,
+.holding-items,
+.room-containers {
+  display: flex;
+}
+
+.chest {
+  margin-left: 0.5rem;
+}
+
+.get-item,
+.held-item {
+  color: sienna;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  &:hover {
+    color: black;
+  }
 }
