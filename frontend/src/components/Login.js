@@ -22,7 +22,7 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const postUrl = newUser ? `${baseUrl}registration/` : `${baseUrl}login/`;
+    const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     const postData = newUser
       ? {
           username: formData.username,
