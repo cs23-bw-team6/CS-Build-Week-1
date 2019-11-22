@@ -18,13 +18,17 @@ const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.
 
 const Compass = ({ fetchRoomData, fetchPlayerData }) => {
   async function handleClick(e) {
-    const { data } = await axiosWithAuth().post(`${baseUrl}api/adv/move/`, {
-      direction: e.target.name
-    });
-    if (data.error_msg === '') {
-      fetchRoomData();
-      fetchPlayerData();
-    } else console.error(data.error_msg);
+    try {
+      const { data } = await axiosWithAuth().post(`${baseUrl}api/adv/move/`, {
+        direction: e.target.name
+      });
+      if (data.error_msg === '') {
+        fetchRoomData();
+        fetchPlayerData();
+      }
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   return (
