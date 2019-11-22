@@ -42,7 +42,7 @@ const Game = () => {
   async function fetchPlayerData() {
     try {
       const { data } = await axiosWithAuth().get(`${baseUrl}api/adv/init/`);
-      // console.log('fetchplayerdata data', data);
+      console.log('fetchplayerdata ', data);
       setPlayer(data);
     } catch (err) {
       console.error(err);
