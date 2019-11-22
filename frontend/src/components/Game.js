@@ -9,6 +9,8 @@ import WorldMap from './WorldMap';
 import oldMap from '../assets/map.png';
 import '../scss/Game.scss';
 
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
+
 const Game = () => {
   const [rooms, setRooms] = useState(null);
   const [player, setPlayer] = useState(null);
@@ -21,7 +23,7 @@ const Game = () => {
 
   async function fetchRoomData() {
     try {
-      const { data } = await axiosWithAuth().get('adv/rooms/');
+      const { data } = await axiosWithAuth().get(`${baseUrl}api/adv/rooms/`);
       const roomsDict = data.rooms;
       let roomsArray = [];
       for (let room in roomsDict) {
@@ -39,7 +41,7 @@ const Game = () => {
 
   async function fetchPlayerData() {
     try {
-      const { data } = await axiosWithAuth().get('adv/init/');
+      const { data } = await axiosWithAuth().get(`${baseUrl}api/adv/init/`);
       // console.log('fetchplayerdata data', data);
       setPlayer(data);
     } catch (err) {
