@@ -34,7 +34,7 @@ const Login = (setToken) => {
     try {
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
-      setToken(res.data.key);
+      setToken.setToken(res.data.key);
     } catch (err) {
       console.error(err);
     }
