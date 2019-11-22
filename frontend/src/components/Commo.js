@@ -1,12 +1,15 @@
 import React from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
+import regeneratorRuntime from "regenerator-runtime";
 
 import '../scss/Commo.scss';
+
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
 const Commo = ({ fetchPlayerData, player, holding, pickup }) => {
   async function getItem(item) {
     try {
-      const { data } = await axiosWithAuth().post('adv/get_item', {
+      const { data } = await axiosWithAuth().post(`${'baseUrl'}api/adv/get_item`, {
         item: item
       });
       console.log('getItem() data', data);
@@ -19,7 +22,7 @@ const Commo = ({ fetchPlayerData, player, holding, pickup }) => {
 
   async function playItem(item) {
     try {
-      const { data } = await axiosWithAuth().post('adv/use_item/', {
+      const { data } = await axiosWithAuth().post(`${baseUrl}api/adv/use_item/`, {
         item: item
       });
       console.log('useItem() data', data);

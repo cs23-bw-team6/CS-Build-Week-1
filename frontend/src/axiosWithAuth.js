@@ -6,8 +6,9 @@ export const axiosWithAuth = () => {
   return axios.create({
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${token}`
+      'Authorization': `Token ${token}`,
+      'withCredentials': true,
     },
-    baseURL: `${process.env.REACT_APP_BACKEND}`
+    baseURL: `${process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/'}`
   });
 };

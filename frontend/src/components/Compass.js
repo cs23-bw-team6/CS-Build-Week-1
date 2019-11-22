@@ -1,5 +1,6 @@
 import React from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
+import regeneratorRuntime from "regenerator-runtime";
 
 import compass11 from '../assets/compass/compass11.png';
 import compass12 from '../assets/compass/compass12.png';
@@ -13,15 +14,24 @@ import compass33 from '../assets/compass/compass33.png';
 
 import '../scss/Compass.scss';
 
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
+
 const Compass = ({ fetchRoomData, fetchPlayerData }) => {
   async function handleClick(e) {
-    const { data } = await axiosWithAuth().post('adv/api/move/', {
-      direction: e.target.name
-    });
-    if (data.error_msg === '') {
-      fetchRoomData();
-      fetchPlayerData();
-    } else console.error(data.error_msg);
+    try {
+      console.log(e.target.name);
+      const { data } = await axiosWithAuth().post(`${baseUrl}api/adv/move/`, {
+        direction: e.target.name
+      });
+      if (data.error_msg === '') {
+        fetchRoomData();
+        fetchPlayerData();
+      } else {
+        console.log(data.error_msg);
+      }
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   return (

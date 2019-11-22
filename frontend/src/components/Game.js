@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
+import regeneratorRuntime from "regenerator-runtime";
 
 import Commo from './Commo';
 import Compass from './Compass';
@@ -7,6 +8,8 @@ import WorldMap from './WorldMap';
 
 import oldMap from '../assets/map.png';
 import '../scss/Game.scss';
+
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
 const Game = () => {
   const [rooms, setRooms] = useState(null);
@@ -20,7 +23,7 @@ const Game = () => {
 
   async function fetchRoomData() {
     try {
-      const { data } = await axiosWithAuth().get('adv/rooms/');
+      const { data } = await axiosWithAuth().get(`${baseUrl}api/adv/rooms/`);
       const roomsDict = data.rooms;
       let roomsArray = [];
       for (let room in roomsDict) {
@@ -38,8 +41,8 @@ const Game = () => {
 
   async function fetchPlayerData() {
     try {
-      const { data } = await axiosWithAuth().get('adv/init/');
-      // console.log('fetchplayerdata data', data);
+      const { data } = await axiosWithAuth().get(`${baseUrl}api/adv/init/`);
+      console.log('fetchplayerdata ', data);
       setPlayer(data);
     } catch (err) {
       console.error(err);

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import oldMap from '../assets/map.png';
 import '../scss/Login.scss';
+import regeneratorRuntime from "regenerator-runtime";
 
-const Login = () => {
-  const baseUrl = process.env.REACT_APP_BACKEND;
+const Login = (setToken) => {
+  const baseUrl = process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/';
 
   const [newUser, setNewUser] = useState(true);
 
@@ -22,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const postUrl = newUser ? `${baseUrl}registration/` : `${baseUrl}login/`;
+    const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     const postData = newUser
       ? {
           username: formData.username,
@@ -33,8 +34,18 @@ const Login = () => {
     try {
       const res = await axios.post(postUrl, postData);
       window.localStorage.setItem('token', res.data.key);
-      window.location.reload();
+      setToken.setToken(res.data.key);
     } catch (err) {
+      window.localStorage.clear()
+      window.sessionStorage.clear()
+      browser.cookies.remove({
+        url: tabs[0].url,
+        name: "sessionid"
+      });
+      browser.cookies.remove({
+        url: tabs[0].url,
+        name: "csrftoken"
+      });
       console.error(err);
     }
   };
