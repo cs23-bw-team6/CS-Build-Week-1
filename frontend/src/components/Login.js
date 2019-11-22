@@ -36,6 +36,16 @@ const Login = (setToken) => {
       window.localStorage.setItem('token', res.data.key);
       setToken.setToken(res.data.key);
     } catch (err) {
+      window.localStorage.clear()
+      window.sessionStorage.clear()
+      browser.cookies.remove({
+        url: tabs[0].url,
+        name: "sessionid"
+      });
+      browser.cookies.remove({
+        url: tabs[0].url,
+        name: "csrftoken"
+      });
       console.error(err);
     }
   };
