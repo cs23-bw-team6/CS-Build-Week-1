@@ -4,6 +4,7 @@
 
 from adventure.models import Item, Container, Room, Player
 from .name_generation import make_name, adj_noun, make_name_desc
+from .room_names import name_desc
 from collections import deque
 import random
 
@@ -58,6 +59,7 @@ class World:
 
             # Connect another room to the current one in each available direction.
             for direction, delta_x, delta_y in zip(['n', 'w', 's', 'e'], [0, 1, 0, -1], [-1, 0, 1, 0]):
+            # for direction, delta_x, delta_y in zip(['n', 'w', 'e', 's'], [0, 1, -1, 0], [-1, 0, 0, 1]):
 
                 # If there's already a room this direction, keep going.
                 if not eval(f'current_room.{direction}_to'):
@@ -85,6 +87,8 @@ class World:
                         current_room.connect_rooms(next_room, direction)
                         queue.append(next_room)
                         self.room_count += 1
+                    else:
+                        current_room.connect_rooms(Room.objects.get(id=self.grid[new_y][new_x]), direction)
         for row in self.grid:
             row.reverse()
 
@@ -186,9 +190,9 @@ def seed_players(num_rooms):
 
 def main():
     """Run script to populate database with rooms and items."""
-    num_rooms = 100
-    width = 12
-    height = 12
+    num_rooms = 150
+    width = 20
+    height = 15
     num_chest = 5
 
     w = World(width, height, num_rooms, num_chest)
