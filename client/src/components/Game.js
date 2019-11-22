@@ -1,13 +1,55 @@
-import React from 'react';
-import oldMap from '../assets/map.png';
+import React, { useState, useEffect } from 'react';
+import { axiosWithAuth } from '../axiosWithAuth';
+
+import Commo from './Commo';
 import Compass from './Compass';
+import WorldMap from './WorldMap';
+
+import oldMap from '../assets/map.png';
 import '../scss/Game.scss';
 
 const Game = () => {
+  const [rooms, setRooms] = useState(null);
+  const [player, setPlayer] = useState(null);
+  const [holding, pickup] = useState([]);
+
   function logout() {
     window.localStorage.clear();
     window.location.reload();
   }
+
+  async function fetchRoomData() {
+    try {
+      const { data } = await axiosWithAuth().get('adv/rooms/');
+      const roomsDict = data.rooms;
+      let roomsArray = [];
+      for (let room in roomsDict) {
+        let thisRoom = {
+          ...roomsDict[room],
+          id: room
+        };
+        roomsArray.push(thisRoom);
+      }
+      setRooms(roomsArray);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function fetchPlayerData() {
+    try {
+      const { data } = await axiosWithAuth().get('adv/init/');
+      // console.log('fetchplayerdata data', data);
+      setPlayer(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    if (!rooms) fetchRoomData();
+    if (!player) fetchPlayerData();
+  }, [player, rooms]);
 
   return (
     <section className="Game">
@@ -21,13 +63,18 @@ const Game = () => {
       </header>
 
       <main className="Game__body">
-        <div className="WorldMap">WorldMap</div>
+        <WorldMap rooms={rooms} />
         <div className="Game__body__bottom">
-          <section className="Commo">
-            <div className="Room">Room Description</div>
-            <div className="Inventory">Inventory</div>
-          </section>
-          <Compass />
+          <Commo
+            player={player}
+            fetchPlayerData={fetchPlayerData}
+            holding={holding}
+            pickup={pickup}
+          />
+          <Compass
+            fetchRoomData={fetchRoomData}
+            fetchPlayerData={fetchPlayerData}
+          />
         </div>
       </main>
     </section>

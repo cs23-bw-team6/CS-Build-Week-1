@@ -186,9 +186,9 @@ def seed_players(num_rooms):
 
 def main():
     """Run script to populate database with rooms and items."""
-    num_rooms = 10
-    width = 5
-    height = 5
+    num_rooms = 100
+    width = 12
+    height = 12
     num_chest = 5
 
     w = World(width, height, num_rooms, num_chest)
