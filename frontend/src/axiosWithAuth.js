@@ -8,6 +8,6 @@ export const axiosWithAuth = () => {
       'Content-Type': 'application/json',
       'Authorization': `Token ${token}`
     },
-    baseURL: `${process.env.REACT_APP_BACKEND}`
+    baseURL: `${process.env.REACT_APP_BACKEND || 'https://treasure-hunting-cs23.herokuapp.com/'}`
   });
 };
