@@ -25,6 +25,8 @@ const Compass = ({ fetchRoomData, fetchPlayerData }) => {
       if (data.error_msg === '') {
         fetchRoomData();
         fetchPlayerData();
+      } else {
+        console.log(data.error_msg);
       }
     } catch(err) {
       console.error(err);
