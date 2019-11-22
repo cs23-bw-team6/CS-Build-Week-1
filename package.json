@@ -4,7 +4,8 @@
 	"private": true,
 	"dependencies": {
 		"axios": "^0.19.0",
-		"react-scripts": "3.2.0"
+		"react-scripts": "3.2.0",
+		"regenerator-runtime": "^0.13.3"
 	},
 	"scripts": {
 		"dev": "webpack --mode development ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
