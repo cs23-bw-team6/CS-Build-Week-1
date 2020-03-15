@@ -25,16 +25,24 @@ const Login = (setToken) => {
     e.preventDefault();
     const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     console.log(formData.username + " " + formData.password);
-    const postData = newUser
-      ? {
-          username: formData.username,
-          password1: formData.password,
-          password2: formData.password,
-          email: ''
-        }
-      : { username: formData.username, password: formData.password };
+    let formData = new FormData();
+    bodyFormData.set('username', formData.username);
+    if (newUser) {
+      bodyFormData.set('password1', formData.password);
+      bodyFormData.set('password2', formData.password);
+    } else {
+      bodyFormData.set('password', formData.password);
+    }
+    // const postData = newUser
+    //   ? {
+    //       username: formData.username,
+    //       password1: formData.password,
+    //       password2: formData.password,
+    //       email: ''
+    //     }
+    //   : { username: formData.username, password: formData.password };
     try {
-      const res = await axios.post(postUrl, postData, { 'Content-Type': 'application/json'});
+      const res = await axios.post(postUrl, bodyFormData);
       window.localStorage.setItem('token', res.data.key);
       setToken.setToken(res.data.key);
     } catch (err) {
