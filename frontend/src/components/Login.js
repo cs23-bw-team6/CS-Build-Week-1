@@ -23,7 +23,7 @@ const Login = (setToken) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const postUrl = newUser ? `${baseUrl}api/register/` : `${baseUrl}api/login/`;
+    const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     console.log(formData.username + " " + formData.password);
     const postData = newUser
       ? {
