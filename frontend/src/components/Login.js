@@ -28,11 +28,12 @@ const Login = (setToken) => {
       ? {
           username: formData.username,
           password1: formData.password,
-          password2: formData.password
+          password2: formData.password,
+          email: ''
         }
       : { username: formData.username, password: formData.password };
     try {
-      const res = await axios.post(postUrl, postData);
+      const res = await axios.post(postUrl, postData, { 'Content-Type': 'application/json'});
       window.localStorage.setItem('token', res.data.key);
       setToken.setToken(res.data.key);
     } catch (err) {
