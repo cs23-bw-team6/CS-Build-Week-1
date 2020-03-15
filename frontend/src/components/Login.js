@@ -25,7 +25,7 @@ const Login = (setToken) => {
     e.preventDefault();
     const postUrl = newUser ? `${baseUrl}api/registration/` : `${baseUrl}api/login/`;
     console.log(formData.username + " " + formData.password);
-    let formData = new FormData();
+    let bodyFormData = new FormData();
     bodyFormData.set('username', formData.username);
     if (newUser) {
       bodyFormData.set('password1', formData.password);
