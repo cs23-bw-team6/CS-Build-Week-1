@@ -132,7 +132,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
-
+CORS_ORIGIN_WHITELIST = ( 'localhost', )
 CORS_ORIGIN_ALLOW_ALL=True
 
 # Internationalization
