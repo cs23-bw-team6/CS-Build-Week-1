@@ -16,7 +16,7 @@ import json
 #                 secret=config('PUSHER_SECRET'),
 #                 cluster=config('PUSHER_CLUSTER'))
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["GET"])
 def spawn(request):
     """Move all players to a random room and scatter keys and chests about dungeon."""
@@ -25,7 +25,7 @@ def spawn(request):
     return JsonResponse({"World": "re-spawned."}, safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["GET"])
 def rooms(request):
     """Return dict of room ids and room dicts."""
@@ -33,7 +33,7 @@ def rooms(request):
     return JsonResponse({'rooms': rooms_}, safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["GET"])
 def initialize(request):
     """Place an active user in the map.
@@ -59,7 +59,7 @@ def initialize(request):
         safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["POST"])
 def use_item(request):
     """Use a key to open a chest.
@@ -113,7 +113,7 @@ def use_item(request):
     return JsonResponse({"error_msg": "You don't have that item."}, safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["POST"])
 def get_item(request):
     """Pick up an item in the current room."""
@@ -133,7 +133,7 @@ def get_item(request):
     return JsonResponse({'error_msg': "I don't see that here"}, safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["POST"])
 def move(request):
     """Move the player in the given direction.
@@ -197,7 +197,7 @@ def move(request):
             safe=True)
 
 
-# @csrf_exempt
+@csrf_exempt
 @api_view(["POST"])
 def say(request):
     # IMPLEMENT
